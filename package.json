@@ -1,0 +1,17 @@
+{
+  "name": "ece-webtech-2023-fall-gr03-02",
+  "version": "1.0.0",
+  "description": "this is our repository for webtech courses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

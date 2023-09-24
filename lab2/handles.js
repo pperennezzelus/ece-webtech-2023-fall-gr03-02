@@ -23,9 +23,9 @@ module.exports = {
             res.write('How this app work\nIf you put a name on the path of the application it will reply something to you \nhello takes a name query parameter and random names reply hello [name] (http://localhost:8080/hello?name=Jean)\nMy own name replies with a short intro of myself \nAny other path replies a 404 code with a not found message')
         }
         else if (path === '/hello' && 'name' in params) {
-            if(params['name'] === 'Hugo')
+            if(params['name'] === 'Seb')
             {
-                res.write('I m Hugo the developper of this small application')
+                res.write('I m Seb the developper of this small application')
 
             }else{
                 res.write('Hello '+ params['name']);

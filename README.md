@@ -1,5 +1,9 @@
-# ece-webtech-2023-fall-gr03-02
-This is the repository of **Paul PERENNEZ-ZELUS, Hugo BENEDIT and Sébastien TRAN** for webtech courses.  
+# LAB 2
+This is the lab 2 of our repositories.  
 
 ## Getting Started
-After clonning this repository, go in the lab folder that you want to use and follow the lab README.md file!  
+After clonning this repository, type "npm start" to get started!  
+You can now go on http://localhost:8080/ and explore the features.  
+
+### Lab Progress
+Everything works just fine.

@@ -1,5 +1,5 @@
 # ece-webtech-2023-fall-gr03-02
-This is the lab branch of **Sebastien TRAN**.  
+This is the lab2 of **Sebastien TRAN**.  
 
 ## Getting Started
 After clonning this repository, type "npm start" to get started!  

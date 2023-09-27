@@ -1,10 +1,9 @@
 # ece-webtech-2023-fall-gr03-02
-
 This folder is a small application of localhost
 
-Prerequiste 
+Prerequisite
 
-The lab starts a new Node.js project which serves as the basis for the following courses. Every week, incremental features are completed toward the creation of a working application.
+The lab starts a new Node.js project, which serves as the basis for the following courses. Every week, incremental features are completed toward the creation of a working application.
 
 In the end, it becomes the basis for your final project. The final grade reflects the delivered project, as well as its Git history.
 Before starting
@@ -24,9 +23,9 @@ Before starting
 
 
 It is working on the localhost:8080
-You can use path like "localhost:8080/" to start the website after u start the nodejs script in your terminal with "npm run start" or "npm run dev" for editing
-You have different path :
-	- "localhost:8080/" give u information on this application
-	- "localhost:8080/hello?name==choose_name" say hello [choose_name] in the application
-	- "localhost:8080/hello?name==Hugo" an introduction of myself
-	- all other path redirect you to an error 404 no mesaeg found
+You can use the path like "localhost:8080/" to start the website after you start the Node.js script in your terminal with "npm run start" or "npm run dev" for editing
+You have different paths:
+    - "localhost:8080/" gives you information on this application
+    - "localhost:8080/hello?name==choose_name" says hello [choose_name] in the application
+    - "localhost:8080/hello?name==Hugo" an introduction of myself
+    - all other paths redirect you to an error 404 no message found

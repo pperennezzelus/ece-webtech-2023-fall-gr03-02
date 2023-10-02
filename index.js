@@ -1,26 +1,19 @@
+const express = require('express');
+const app = express();
+const getRoutes = require('./routes/getRoutes');
+const postRoutes = require('./routes/postRoutes');
+const putRoutes = require('./routes/putRoutes');
+const deleteRoutes = require('./routes/deleteRoutes');
 
+app.set('port', 8080);
 
-// Import modules
-const http = require('http')
-const handles = require('./handles')
+app.use('/get', getRoutes);
 
-/*
-//html string 
-const content = '<!DOCTYPE html>' +
-'<html>' +
-'    <head>' +
-'        <meta charset="utf-8" />' +
-'        <title>ECE AST</title>' +
-'    </head>' + 
-'    <body>' +
-'       <p>Hello World!</p>' +
-'    </body>' +
-'</html>'*/
+app.use('/post', postRoutes);
+app.use('/put', putRoutes);
+app.use('/delete', deleteRoutes);
 
-
-
-
-// Declare an http server
-http
-.createServer(handles.serverHandle)
-.listen(8080)
+app.listen(
+  app.get('port'),
+  () => console.log(`Server listening on ${app.get('port')}`)
+);

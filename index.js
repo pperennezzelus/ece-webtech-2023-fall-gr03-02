@@ -1,17 +1,16 @@
-const express = require('express');
-const app = express();
-const getRoutes = require('./routes/getRoutes');
-const postRoutes = require('./routes/postRoutes');
-const putRoutes = require('./routes/putRoutes');
-const deleteRoutes = require('./routes/deleteRoutes');
+const express = require('express')
+const app = express()
+const getRoutes = require('./routes/getRoutes')
+const postRoutes = require('./routes/postRoutes')
+const putRoutes = require('./routes/putRoutes')
+const deleteRoutes = require('./routes/deleteRoutes')
 
-app.set('port', 8080);
+app.set('port', 8080)
 
-app.use('/get', getRoutes);
-
-app.use('/post', postRoutes);
-app.use('/put', putRoutes);
-app.use('/delete', deleteRoutes);
+app.use('/', getRoutes)
+app.use('/', postRoutes)
+app.use('/', putRoutes)
+app.use('/', deleteRoutes)
 
 app.listen(
   app.get('port'),

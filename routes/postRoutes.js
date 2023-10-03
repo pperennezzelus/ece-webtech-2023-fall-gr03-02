@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('./database')
+const db = require('../database')
 const { v4: uuidv4 } = require('uuid');
 
 router.use(express.json())

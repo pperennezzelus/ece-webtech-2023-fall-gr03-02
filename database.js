@@ -4,7 +4,7 @@ const db = {
         id: '6ec0bd7f-11c0-43da-975e-2a8ad9ebae0b',
         title: 'test',
         content: 'Content of the article.',
-        date: '04/10/2022',
+        date: '04/10/2023',
         author: 'Liz Gringer'
       },
       // ...

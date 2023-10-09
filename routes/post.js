@@ -16,7 +16,6 @@ router.post('/articles', (req, res) => {
     date,
     author,
   }
-
   db.articles.push(newArticle)
   res.status(201).json(newArticle)
 })
@@ -34,7 +33,6 @@ router.post('/articles/:articleId/comments', (req, res) => {
     articleId,
     author,
   }
-
   db.comments.push(newComment)
   res.status(201).json(newComment)
 })

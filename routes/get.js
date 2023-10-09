@@ -12,7 +12,6 @@ router.get('/articles', (req, res) => {
 
 router.get('/articles/:articleId', (req, res) => {
   const id = req.params.articleId
-
   const article = db.articles.find((article) => article.id === id)
 
   if (!article) {
@@ -24,7 +23,6 @@ router.get('/articles/:articleId', (req, res) => {
 
 router.get('/articles/:articleId/comment', (req, res) => {
   const id = req.params.articleId
-
   const comment = db.comments.find((comment) => comment.articleId === id)
 
   if (!comment) {

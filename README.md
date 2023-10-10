@@ -1,43 +1,36 @@
-# ece-webtech-2023-fall-gr03-06
-Webtech Project: Third Lab
-ECE ING4 grp3
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Introduction
+## Getting Started
 
-This readme contains the documentation over the lab3 done for the webtech class.
-This is a Node.js and Express project. It includes an App localhost web server, with REST API. 
+First, run the development server:
 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Before starting
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-1. Install **Node.js** by referring the [prerequisites](../01.prerequisite/index.md#nodejs-installation).
-2. [Install Express](https://www.npmjs.com/package/express#installation)
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Learn More
 
-## Running/usage instructions
+To learn more about Next.js, take a look at the following resources:
 
-After downloading the folder, open the **Terminal** and use the "cd" command to acces the folder.
-Once your are inside the folder, lauch the localhost server using this command: 
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```$ npm start ```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-The web server is now running on your local machine, to acces it:
-Open your web browser and copy this url: "http://localhost:8080"
+## Deploy on Vercel
 
-GET API :
-- GET `/articles` - list all articles
-- GET `/articles/:articleId` - get an article by ID
-- GET `/articles/:articleId/comments` - get all comments of the article with `articleId`
-- GET `/articles/:articleId/comments/:commentId` - get a comment with `commentId` of the article with `articleId`
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-POST API : 
-- POST `/articles` - add a new article
-- POST `/articles/:articleId/comments` - add a new comment to a specific article with `articleId`
-
-
-## Authors
-
-Paul PERENNEZ--ZELUS
-Sébastien TRAN
-Hugo BENEDIT
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

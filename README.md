@@ -23,7 +23,7 @@ bun dev
 
 ## 1 Project Initialization
 
-The project has been initialized using ```bash npx create-next-app@latest``` and has the primary application in the app folder.
+The project has been initialized using bash ```npx create-next-app@latest``` and has the primary application in the app folder.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -34,11 +34,10 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## 2 Blogging Website Skeleton
 
 Various web pages have been set up, encompassing:
-
-    Home Page: 
-    About Page: 
-    Contacts Page: 
-    Articles Page: 
+- Home Page: ```/``` The main page
+- About Page: ```/about``` Some information about the page
+- Contacts Page: ```/contact``` Link to our linkedIn to contact us
+- Articles Page: ```/articles``` List of our articles
 
 ## 3 Dynamic Routing
 

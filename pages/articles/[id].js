@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import articlesData from '../../database/articles.json'
-import Header from 'database/header'
+import Header from 'Header/header.js'
 
 const DynamicArticle = () => {
   const router = useRouter()

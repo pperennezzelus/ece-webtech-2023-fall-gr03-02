@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import Header from 'database/header'
+import Header from 'Header/header.js'
 
 export default function Articles() {
     return (

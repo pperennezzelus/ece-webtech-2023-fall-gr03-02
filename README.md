@@ -6,7 +6,6 @@ Requirements :
 
 - Node.js and npm
 - Git
-- 
 
 ## Getting Started
 

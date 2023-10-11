@@ -1,11 +1,11 @@
-import React from 'react';
-import Header from 'pages/header';
+import React from 'react'
+import Header from 'database/header'
 
 export default function About() {
     return (
       <div> 
+        <Header></Header>
       <h1> About </h1>
-      <Header>  </Header>
       <p> This is the site for the Webtech lab4 of groupe 02<br></br>
        Written by :
         </p>

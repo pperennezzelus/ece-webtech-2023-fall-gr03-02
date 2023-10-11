@@ -1,13 +1,13 @@
 import React from 'react'
-import Header from 'pages/header'
+import Header from 'database/header'
 import Link from 'next/link'
 
 
 export default function Contact() {
     return (
         <div>
+            <Header></Header>
             <h1> Contact </h1>
-            <Header>  </Header>
             <p>  You can contact us on LinkedIn : </p>
             <ul>
                 <li> <Link href="https://www.linkedin.com/in/paul-perennez-zelus-103b9a220/">Paul PERENNEZ-ZELUS</Link></li>

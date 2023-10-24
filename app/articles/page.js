@@ -10,9 +10,9 @@ export default function Articles() {
           <li key={article.id}>
             <a
               href={`/articles/${article.id}`}
-              className="block bg-white p-4 rounded-lg shadow-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-md"
+              className="block bg-white p-4 rounded-lg shadow-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-md hover:bg-gray-100"
             >
-              <h3 className="text-xl font-semibold text-blue-600 hover:underline">
+              <h3 className="text-xl font-semibold">
                 {article.title}
               </h3>
               <p className="text-gray-600 mt-2">{article.content}</p>

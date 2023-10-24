@@ -3,8 +3,8 @@ import React from 'react'
 const Home = () => {
   return (
     <div className="container mx-auto mt-8">
-    <h1 className="text-4xl font-semibold text-center">Welcome to Penguin Motors</h1>
-    <p className="text-lg text-gray-600 text-center mt-4">This is the website of group 2 in ING4 Gr3 <br></br> You can find us in the contact page!</p>
+    <h1 className="text-4xl font-semibold text-center">Welcome to Pinguin Motors</h1>
+    <p className="text-lg text-gray-600 text-center mt-4">This is the website of group 2 in ING4 Gr3 <br></br> You can find us in the <a href='/contact'><strong>contact</strong></a> page!</p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
         <a href="/articles" className="bg-white p-4 rounded-lg shadow-lg block hover:bg-gray-100 transition duration-300">

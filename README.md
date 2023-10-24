@@ -43,6 +43,11 @@ Various web pages have been set up, encompassing:
 
 The project boasts dynamic routes, especially for articles. An example being /articles/:articleId which displays an article based on its unique ID alongside some placeholder content.
 
+## 4 Libraries and frameworks | with React and Next.js
+
+We used React together with Next.js to give us building blocks to create web applications fast. Since this lab, we start working on a skeleton of our course project, a blogging website. What we did: Initialize the Next.js application, Build a website skeleton for blogging and Build dynamic routes.
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -5,7 +5,7 @@ export default function About() {
     return (
 
         <div className="container mx-auto mt-8 p-4 bg-white rounded-lg shadow-lg">
-            <h1 className="text-3xl font-semibold mb-4">About Penguin Motors</h1>
+            <h1 className="text-3xl font-semibold mb-4">About Pinguin Motors</h1>
             <p className="text-gray-700 leading-relaxed">
                 Welcome to Penguin Motors, your trusted source for high-quality vehicles. With years of experience in the automotive industry, we are dedicated to providing our customers with the finest selection of cars.
             </p>

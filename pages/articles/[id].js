@@ -1,6 +1,7 @@
+// /pages/articles/[id].js
+
 import articlesData from '../../data/articles.json';
 
-// Your component
 export default function Page({ article }) {
   return (
     <div className="container mx-auto mt-8">
@@ -19,14 +20,16 @@ export default function Page({ article }) {
   );
 }
 
-// Data fetching method
-export async function getServerSideProps(context) {
-  const id = context.params.id;
-  const article = articlesData.find((article) => article.id === parseInt(id));
+export async function getStaticPaths() {
+  const paths = articlesData.map((article) => ({
+    params: { id: article.id.toString() }
+  }));
 
-  if (!article) {
-    return { notFound: true }; // This will show a 404 page if the article is not found
-  }
+  return { paths, fallback: 'blocking' };
+}
+
+export async function getStaticProps({ params }) {
+  const article = articlesData.find((a) => a.id === parseInt(params.id));
 
   return {
     props: { article }

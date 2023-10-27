@@ -1,13 +1,11 @@
-import React from 'react';
 import articlesData from '../../data/articles.json';
 
-
-export default function Articles() {
+export default function Articles({ articles }) {
   return (
     <div className="container mx-auto mt-8">
       <h2 className="text-3xl font-semibold mb-4">Featured Articles</h2>
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {articlesData.map((article) => (
+        {articles.map((article) => (
           <li key={article.id}>
             <a
               href={`/articles/${article.id}`}
@@ -23,4 +21,10 @@ export default function Articles() {
       </ul>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: { articles: articlesData }
+  };
 }

@@ -1,5 +1,3 @@
-// /pages/articles/[id].js
-
 import articlesData from '../../data/articles.json';
 
 export default function Page({ article }) {

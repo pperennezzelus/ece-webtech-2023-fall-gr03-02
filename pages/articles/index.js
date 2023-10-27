@@ -1,4 +1,5 @@
 import articlesData from '../../data/articles.json';
+import Link from 'next/link'
 
 export default function Articles({ articles }) {
   return (
@@ -7,7 +8,7 @@ export default function Articles({ articles }) {
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {articles.map((article) => (
           <li key={article.id}>
-            <a
+            <Link
               href={`/articles/${article.id}`}
               className="block bg-white p-4 rounded-lg shadow-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-md hover:bg-gray-100"
             >
@@ -15,7 +16,7 @@ export default function Articles({ articles }) {
                 {article.title}
               </h3>
               <p className="text-gray-600 mt-2">{article.content}</p>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

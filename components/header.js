@@ -1,5 +1,6 @@
 import React from 'react'
-import '../app/styles/global.css'
+import Link from 'next/link'
+
 
 const Header = () => {
     return (
@@ -7,22 +8,22 @@ const Header = () => {
         <header>
             <nav className="bg-indigo-400 py-4">
                 <div className="container mx-auto flex justify-between items-center">
-                    <a href="/" className="flex items-center text-2xl text-white font-semibold">
+                    <Link href="/" className="flex items-center text-2xl text-white font-semibold">
                         <img src="logo.png" alt="Logo" className="h-8 w-8 mr-2" />
                         Pinguin Motors
-                    </a>
+                    </Link>
                     <ul className="flex space-x-4">
                         <li>
-                            <a href="/" className="text-white hover:text-gray-300 transition duration-300">Home</a>
+                            <Link href="/" className="text-white hover:text-gray-300 transition duration-300">Home</Link>
                         </li>
                         <li>
-                            <a href="/articles" className="text-white hover:text-gray-300 transition duration-300">Articles</a>
+                            <Link href="/articles" className="text-white hover:text-gray-300 transition duration-300">Articles </Link>
                         </li>
                         <li>
-                            <a href="/contact" className="text-white hover:text-gray-300 transition duration-300">Contact</a>
+                            <Link href="/contact" className="text-white hover:text-gray-300 transition duration-300">Contact </Link>
                         </li>
                         <li>
-                            <a href="/about" className="text-white hover:text-gray-300 transition duration-300">About</a>
+                            <Link href="/about" className="text-white hover:text-gray-300 transition duration-300">About </Link>
                         </li>
                     </ul>
                 </div>

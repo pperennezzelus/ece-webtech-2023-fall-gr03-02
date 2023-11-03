@@ -70,15 +70,26 @@ const Header = () => {
               </Link>
             </li>
             {loading ? null : user ? (
-              <li className="flex items-center space-x-2">
-                {/* placeholder for an account icon.*/}
-                <span className="bg-white rounded-full p-2">🚹</span>
+              <li className="flex items-center space-x-2 relative">
+                <img src="/admin.jpg" alt="User profile" className="h-8 w-8 rounded-full" />
                 <span className="text-white">{user.username}</span>
+                <div className="hidden absolute top-full left-0 z-10 w-32 h-32">
+                  <img
+                    src="/admin.jpg"
+                    alt="User profile"
+                    className="w-full h-full rounded-lg object-cover"
+                  />
+                </div>
               </li>
             ) : null}
           </ul>
         </div>
       </nav>
+      <style jsx>{`
+        li:hover > div {
+          display: block;
+        }
+      `}</style>
     </header>
   );
 };

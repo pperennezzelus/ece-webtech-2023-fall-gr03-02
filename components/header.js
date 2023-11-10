@@ -1,29 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useUser } from "./UserContext";
 import Link from "next/link";
 
 const Header = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchProfile() {
-      try {
-        const response = await fetch("/api/profile");
-        if (response.status === 200) {
-          const data = await response.json();
-          setUser(data);
-        } else {
-          setUser(null);
-        }
-      } catch (error) {
-        console.error("Failed to fetch user profile:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchProfile();
-  }, []);
+  const { user, logout } = useUser(); // Access user and logout function from context
 
   return (
     <header>
@@ -50,7 +30,7 @@ const Header = () => {
                 href="/articles"
                 className="text-white hover:text-gray-300 transition duration-300"
               >
-                Articles{" "}
+                Articles
               </Link>
             </li>
             <li>
@@ -58,7 +38,7 @@ const Header = () => {
                 href="/contact"
                 className="text-white hover:text-gray-300 transition duration-300"
               >
-                Contact{" "}
+                Contact
               </Link>
             </li>
             <li>
@@ -66,22 +46,36 @@ const Header = () => {
                 href="/about"
                 className="text-white hover:text-gray-300 transition duration-300"
               >
-                About{" "}
+                About
               </Link>
             </li>
-            {loading ? null : user ? (
-              <li className="flex items-center space-x-2 relative">
-                <img src="/admin.jpg" alt="User profile" className="h-8 w-8 rounded-full" />
-                <span className="text-white">{user.username}</span>
-                <div className="hidden absolute top-full left-0 z-10 w-32 h-32">
-                  <img
-                    src="/admin.jpg"
-                    alt="User profile"
-                    className="w-full h-full rounded-lg object-cover"
-                  />
-                </div>
+            {user ? (
+              <>
+                <Link
+                  href="/login"
+                  className="text-white hover:text-gray-300 transition duration-300"
+                >
+                  <li className="text-white">{user.name}</li>
+                </Link>
+                <li>
+                  <button
+                    onClick={logout}
+                    className="text-white hover:text-gray-300 transition duration-300"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link
+                  href="/login"
+                  className="text-white hover:text-gray-300 transition duration-300"
+                >
+                  Login
+                </Link>
               </li>
-            ) : null}
+            )}
           </ul>
         </div>
       </nav>

@@ -1,32 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const LoginControlled = () => {
   // State to store the form data
   const [formData, setFormData] = useState({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
 
   // Function to handle the change in the input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would usually send the formData to your server
     console.log(formData);
   };
 
   return (
     <div className="container mx-auto p-8">
       <h1 className="text-center text-2xl font-bold mb-4">Login Controlled</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 items-center"
+      >
         <label className="flex flex-col w-full max-w-xs">
           Username:
           <input

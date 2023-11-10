@@ -3,7 +3,7 @@ import { useUser } from "./UserContext";
 import Link from "next/link";
 
 const Header = () => {
-  const { user, logout } = useUser(); // Access user and logout function from context
+  const { user, logout } = useUser(); // Access user and logout function from UserContext component
 
   return (
     <header>
@@ -55,7 +55,14 @@ const Header = () => {
                   href="/login"
                   className="text-white hover:text-gray-300 transition duration-300"
                 >
-                  <li className="text-white">{user.name}</li>
+                  <li className="text-white flex items-center">
+                    <img
+                      src={user.picture}
+                      alt={user.name}
+                      className="h-6 w-6 rounded-full mr-2"
+                    />
+                    {user.name}
+                  </li>
                 </Link>
                 <li>
                   <button

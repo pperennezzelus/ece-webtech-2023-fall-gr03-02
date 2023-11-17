@@ -14,10 +14,9 @@ export default function Contacts() {
         setContacts(data)
     })()
   }, [])
-  
-  console.log(contacts)
+
   return (
-    
+    <div>
       <div className="not-prose -my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -45,6 +44,7 @@ export default function Contacts() {
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-slate-500">{contact.email}</td>
                     <td>
                       <Link href={`/admin/contacts/${contact.id}`} className={"w-5 h-5 block bg-slate-200 hover:bg-blue-500 hover:text-white rounded-full"}>
+                        
                       </Link>
                     </td>
                   </tr>
@@ -54,5 +54,6 @@ export default function Contacts() {
           </div>
         </div>
       </div>
+    </div>
   )
 }

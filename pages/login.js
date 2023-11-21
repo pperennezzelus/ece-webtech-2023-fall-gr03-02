@@ -1,76 +1,24 @@
-import React, { useState } from "react";
-import { useUser } from "../components/UserContext";
-import users from "../data/users.json";
+import { Auth } from '@supabase/auth-ui-react';
+import { createClient } from '@supabase/supabase-js';
+import { ThemeSupa } from '@supabase/auth-ui-shared'
 
-const LoginPage = () => {
-  const { user, login } = useUser();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const supabase = createClient(
+  'http://localhost:8000',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE'
+);
 
-  const authenticateUser = (email, password) => {
-    return users.find(
-      (user) => user.email === email && user.password === password
-    );
-  };
+const LoginPage = () => (
+  <div className="container mx-auto mt-8 p-8 bg-white rounded-md shadow-md max-w-md">
 
-  const onClickLogin = async (e) => {
-    e.preventDefault();
-    const authenticatedUser = authenticateUser(email, password);
-    if (authenticatedUser) {
-      login({ ...authenticatedUser });
-    } else {
-      alert("Wrong Email or Password");
-    }
-  };
-
-  return (
-    <div className="container mx-auto p-8">
-      {user ? (
-        <div className="user-info-container mt-8 text-center">
-          <h2 className="text-2xl font-bold">Welcome, {user.name}</h2>
-          <img
-            src={user.picture}
-            alt={user.name}
-            className="block mx-auto border-2 border-gray-300 rounded-full h-32 w-32 mt-4"
-          />
-          <p className="mt-4">Email: {user.email}</p>
-        </div>
-      ) : (
-        <>
-          <h1 className="text-center text-2xl font-bold mb-4">Login</h1>
-          <form
-            onSubmit={onClickLogin}
-            className="flex flex-col gap-4 items-center"
-          >
-            <label className="flex flex-col w-full max-w-xs">
-              Email:
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="p-2 border-2 border-gray-300 rounded w-full"
-              />
-            </label>
-            <label className="flex flex-col w-full max-w-xs">
-              Password:
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="p-2 border-2 border-gray-300 rounded w-full"
-              />
-            </label>
-            <button
-              type="submit"
-              className="p-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 w-full max-w-xs"
-            >
-              Login
-            </button>
-          </form>
-        </>
-      )}
+      <h1 className="text-3xl font-semibold mb-6">Login to Your Account</h1>
+      <Auth
+        supabaseClient={supabase}
+        appearance={{ theme: ThemeSupa }}
+        providers={['google', 'github']}
+        redirectTo='http://localhost:3000/'
+      />
     </div>
-  );
-};
+
+);
 
 export default LoginPage;

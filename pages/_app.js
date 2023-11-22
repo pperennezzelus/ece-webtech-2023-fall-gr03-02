@@ -1,11 +1,23 @@
-import '../styles/global.css';
-import RootLayout from '../components/layout';
+import "../styles/global.css";
+import RootLayout from "../components/layout";
+import { UserProvider } from "../components/UserContext";
 
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { useState } from "react";
 function MyApp({ Component, pageProps }) {
+  const [supabaseClient] = useState(() => createPagesBrowserClient());
   return (
-    <RootLayout>
-      <Component {...pageProps} />
-    </RootLayout>
+    <UserProvider>
+      <RootLayout>
+        <SessionContextProvider
+          supabaseClient={supabaseClient}
+          initialSession={pageProps.initialSession}
+        >
+          <Component {...pageProps} />
+        </SessionContextProvider>
+      </RootLayout>
+    </UserProvider>
   );
 }
 

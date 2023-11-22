@@ -1,0 +1,20 @@
+[
+  {
+    "email": "sebastien.tran@edu.ece.fr",
+    "password": "root",
+    "name": "Sebastien TRAN",
+    "picture": "sebastien.jpg"
+  },
+  {
+    "email": "ppz@edu.ece.fr",
+    "password": "root",
+    "name": "Paul PZ",
+    "picture": "paul.jpg"
+  },
+  {
+    "email": "hugo.benedit@edu.ece.fr",
+    "password": "root",
+    "name": "Hugo BENEDIT",
+    "picture": "hugo.jpg"
+  }
+]

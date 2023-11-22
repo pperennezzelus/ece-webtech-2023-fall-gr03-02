@@ -13,7 +13,7 @@ const Header = () => {
             href="/"
             className="flex items-center text-2xl text-white font-semibold"
           >
-            <img src="logo.png" alt="Logo" className="h-8 w-8 mr-2" />
+            <img src="/logo.png" alt="Logo" className="h-8 w-8 mr-2" />
             Pinguin Motors
           </Link>
           <ul className="flex space-x-4">

@@ -8,7 +8,13 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     // Check active sessions and set user
-    const session = supabase.auth.session();
+    let session;
+    try {
+      session = supabase.auth.session();
+    } catch (error) {
+      console.error("Error fetching Supabase session:", error);
+      // Optionally, handle the error more gracefully here
+    }
     setUser(session?.user || null);
 
     // Listen for changes to authentication state

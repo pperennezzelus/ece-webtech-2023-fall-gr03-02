@@ -1,12 +1,19 @@
+import { useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "../utils/supabaseClient";
-import Router from "next/router";
+import { useRouter } from "next/router";
+import { useUser } from "../components/UserContext"; // import useUser
 
 const LoginPage = () => {
-  const handleAuthSuccess = () => {
-    Router.push("http://localhost:3000/contact");
-  };
+  const router = useRouter();
+  const { user } = useUser(); // use useUser to get the current user
+
+  useEffect(() => {
+    if (user) {
+      router.push("/profile"); // Redirect to profile if already logged in
+    }
+  }, [user, router]);
 
   return (
     <div className="container mx-auto mt-8 p-8 bg-white rounded-md shadow-md max-w-md">
@@ -15,7 +22,6 @@ const LoginPage = () => {
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
         providers={["google", "github"]}
-        onSuccess={handleAuthSuccess}
       />
     </div>
   );

@@ -3,7 +3,7 @@ import { useUser } from "./UserContext";
 import Link from "next/link";
 
 const Header = () => {
-  const { user, logout } = useUser(); // Access user and logout function from UserContext component
+  const { user, logout, isLoggedIn } = useUser();
 
   return (
     <header>
@@ -49,21 +49,16 @@ const Header = () => {
                 About
               </Link>
             </li>
-            {user ? (
+            {isLoggedIn ? (
               <>
-                <Link
-                  href="/login"
-                  className="text-white hover:text-gray-300 transition duration-300"
-                >
-                  <li className="text-white flex items-center">
-                    <img
-                      src={user.picture}
-                      alt={user.name}
-                      className="h-6 w-6 rounded-full mr-2"
-                    />
-                    {user.name}
-                  </li>
-                </Link>
+                <li>
+                  <Link
+                    href="/profile"
+                    className="text-white hover:text-gray-300 transition duration-300"
+                  >
+                    Profile
+                  </Link>
+                </li>
                 <li>
                   <button
                     onClick={logout}

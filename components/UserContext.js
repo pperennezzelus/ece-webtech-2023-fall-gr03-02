@@ -1,15 +1,36 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import { supabase } from "../utils/supabaseClient"; // Import supabase client
 
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = (userData) => {
-    setUser(userData);
+  useEffect(() => {
+    // Check active sessions and set user
+    const session = supabase.auth.session();
+    setUser(session?.user || null);
+
+    // Listen for changes to authentication state
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user || null);
+      }
+    );
+
+    return () => {
+      authListener.unsubscribe();
+    };
+  }, []);
+
+  const login = async (email, password) => {
+    const { user, error } = await supabase.auth.signIn({ email, password });
+    if (error) throw error;
+    setUser(user);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await supabase.auth.signOut();
     setUser(null);
   };
 

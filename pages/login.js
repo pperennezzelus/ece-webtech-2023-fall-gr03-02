@@ -21,7 +21,7 @@ const LoginPage = () => {
       <Auth
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
-        providers={["google", "github"]}
+        providers={["github"]}
       />
     </div>
   );

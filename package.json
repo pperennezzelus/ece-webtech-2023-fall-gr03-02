@@ -23,7 +23,8 @@
     "next": "^13.5.4",
     "react": "^18",
     "react-dom": "^18",
-    "tailwindcss-font-inter": "^3.0.1"
+    "tailwindcss-font-inter": "^3.0.1",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

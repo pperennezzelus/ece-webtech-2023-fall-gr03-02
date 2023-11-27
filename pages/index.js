@@ -1,5 +1,4 @@
 import React from "react";
-import RootLayout from "../components/layout";
 import Link from "next/link";
 
 const Home = () => {

@@ -13,7 +13,7 @@ export default function Contacts() {
         .select(`id, firstname, lastname, email`);
       setContacts(data);
     })();
-  }, []);
+  }, [supabase]);
 
   return (
     <div>

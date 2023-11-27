@@ -1,6 +1,7 @@
 import React from "react";
 import { useUser } from "./UserContext";
 import Link from "next/link";
+import Image from "next/image"; // Import Image component
 
 const Header = () => {
   const { user, logout, isLoggedIn } = useUser();
@@ -13,7 +14,13 @@ const Header = () => {
             href="/"
             className="flex items-center text-2xl text-white font-semibold"
           >
-            <img src="/logo.png" alt="Logo" className="h-8 w-8 mr-2" />
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={32}
+              height={32}
+              className="mr-2"
+            />
             Pinguin Motors
           </Link>
           <ul className="flex space-x-4">

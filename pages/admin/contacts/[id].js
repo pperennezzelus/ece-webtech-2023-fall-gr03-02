@@ -5,6 +5,7 @@ import md from "markdown-it";
 export default function Contacts({ id }) {
   const [contact, setContact] = useState(null);
   const supabase = useSupabaseClient();
+
   useEffect(() => {
     (async () => {
       let { data, error, status } = await supabase
@@ -14,9 +15,9 @@ export default function Contacts({ id }) {
         .single();
       setContact(data);
     })();
-  }, [id]);
+  }, [id, supabase]);
+
   return (
-    //display the info of contact
     <div>
       {contact && (
         <div className="overflow-hidden divide-y divide-slate-200 shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">

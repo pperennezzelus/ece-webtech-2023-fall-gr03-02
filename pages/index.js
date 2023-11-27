@@ -10,9 +10,9 @@ const Home = () => {
       <p className="text-lg text-gray-600 text-center mt-4">
         This is the website of group 2 in ING4 Gr3 <br></br> You can find us in
         the{" "}
-        <a href="/contact">
+        <Link href="/contact">
           <strong>contact</strong>
-        </a>{" "}
+        </Link>{" "}
         page!
       </p>
 

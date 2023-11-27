@@ -10,10 +10,15 @@ export default function Contact() {
     email: "",
     message: "",
   });
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null); // State for success message
+  const [error, setError] = useState(null); // State for error message
 
   const onSubmit = async function (e) {
     e.preventDefault();
+
+    // Reset error state
+    setError(null);
+
     // Insert contact record into the contacts database
     const { data, error } = await supabase.from("contacts").insert([
       {
@@ -23,6 +28,14 @@ export default function Contact() {
         message: formData.message,
       },
     ]);
+
+    if (error) {
+      console.error("Error inserting data:", error);
+      setError(error.message); // Update error state
+      return;
+    }
+
+    console.log("Inserted data:", data); // Log inserted data
 
     // Reset form data to initial state
     setFormData({
@@ -40,6 +53,7 @@ export default function Contact() {
     <div className="container mx-auto mt-8 p-4 bg-white rounded-md shadow-md max-w-md">
       <h1 className="text-3xl font-semibold mb-6">Contact Us</h1>
       <form onSubmit={onSubmit} className="grid gap-4">
+        {/* First Name Field */}
         <div>
           <label className="block text-sm font-medium text-gray-600">
             First Name
@@ -55,6 +69,8 @@ export default function Contact() {
             required
           />
         </div>
+
+        {/* Last Name Field */}
         <div>
           <label className="block text-sm font-medium text-gray-600">
             Last Name
@@ -70,6 +86,8 @@ export default function Contact() {
             required
           />
         </div>
+
+        {/* Email Field */}
         <div>
           <label className="block text-sm font-medium text-gray-600">
             Email
@@ -85,6 +103,8 @@ export default function Contact() {
             required
           />
         </div>
+
+        {/* Message Field */}
         <div>
           <label className="block text-sm font-medium text-gray-600">
             Message
@@ -100,6 +120,8 @@ export default function Contact() {
             required
           ></textarea>
         </div>
+
+        {/* Submit Button */}
         <div>
           <button
             type="submit"
@@ -109,6 +131,8 @@ export default function Contact() {
           </button>
         </div>
       </form>
+
+      {/* Success Message */}
       {message && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black/80"
@@ -119,6 +143,9 @@ export default function Contact() {
           </div>
         </div>
       )}
+
+      {/* Error Message */}
+      {error && <div className="text-red-500">An error occurred: {error}</div>}
     </div>
   );
 }

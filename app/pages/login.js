@@ -22,7 +22,7 @@ const LoginPage = () => {
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
         providers={["github"]}
-        redirectTo="https://ece-webtech-2023-fall-gr03-02.vercel.app/login"
+        redirectTo="localhost:3000/profile"
       />
     </div>
   );

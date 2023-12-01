@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "../components/UserContext";
 import { supabase } from "../utils/supabaseClient";
+import Image from "next/image";
 
 const ProfilePage = () => {
   const { user, isLoggedIn } = useUser();
@@ -139,11 +140,15 @@ const ProfilePage = () => {
           className="text-sm mb-2"
         />
       ) : (
-        <img
-          src={profileData.avatar_url || "default-avatar.png"}
-          alt="Avatar"
-          className="w-32 h-32 rounded-full mb-4"
-        />
+        <div className="w-32 h-32 rounded-full mb-4 overflow-hidden relative">
+          <Image
+            src={profileData.avatar_url || "/default-avatar.png"}
+            alt="Avatar"
+            layout="fill" // This tells Next.js to fill the parent container
+            objectFit="cover" // This scales the image nicely to cover the area
+            unoptimized={true}
+          />
+        </div>
       )}
       <button
         onClick={avatarEditMode ? handleAvatarSaveClick : handleAvatarEditClick}

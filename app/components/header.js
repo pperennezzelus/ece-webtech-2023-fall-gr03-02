@@ -1,98 +1,81 @@
 import React from "react";
 import { useUser } from "./UserContext";
 import Link from "next/link";
-import Image from "next/image"; // Import Image component
+import Image from "next/image";
 
 const Header = () => {
   const { user, logout, isLoggedIn } = useUser();
 
   return (
-    <header>
-      <nav className="bg-indigo-400 py-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <Link
-            href="/"
-            className="flex items-center text-2xl text-white font-semibold"
-          >
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={32}
-              height={32}
-              className="mr-2"
-            />
-            Pinguin Motors
-          </Link>
-          <ul className="flex space-x-4">
-            <li>
-              <Link
-                href="/"
-                className="text-white hover:text-gray-300 transition duration-300"
-              >
+    <header className="shadow-md bg-white sticky top-0 z-10">
+      <nav className="container mx-auto flex items-center justify-between py-4 px-6">
+        <Link href="/" passHref>
+          <span className="flex items-center">
+            <Image src="/logo.png" alt="Logo" width={40} height={40} priority />
+            <span className="ml-3 text-xl font-bold text-gray-800">
+              Pinguin Motors
+            </span>
+          </span>
+        </Link>
+        <ul className="flex items-center space-x-8">
+          <li>
+            <Link href="/" passHref>
+              <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
                 Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/articles"
-                className="text-white hover:text-gray-300 transition duration-300"
-              >
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/articles" passHref>
+              <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
                 Articles
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contact"
-                className="text-white hover:text-gray-300 transition duration-300"
-              >
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/contact" passHref>
+              <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
                 Contact
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className="text-white hover:text-gray-300 transition duration-300"
-              >
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" passHref>
+              <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
                 About
-              </Link>
-            </li>
-            {isLoggedIn ? (
-              <>
-                <li>
-                  <Link
-                    href="/profile"
-                    className="text-white hover:text-gray-300 transition duration-300"
-                  >
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={logout}
-                    className="text-white hover:text-gray-300 transition duration-300"
-                  >
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : (
+              </span>
+            </Link>
+          </li>
+
+          {isLoggedIn ? (
+            <>
               <li>
-                <Link
-                  href="/login"
-                  className="text-white hover:text-gray-300 transition duration-300"
-                >
-                  Login
+                <Link href="/profile" passHref>
+                  <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
+                    Profile
+                  </span>
                 </Link>
               </li>
-            )}
-          </ul>
-        </div>
+              <li>
+                <button
+                  onClick={logout}
+                  className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out focus:outline-none"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link href="/login" passHref>
+                <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
+                  Login
+                </span>
+              </Link>
+            </li>
+          )}
+        </ul>
       </nav>
-      <style jsx>{`
-        li:hover > div {
-          display: block;
-        }
-      `}</style>
     </header>
   );
 };

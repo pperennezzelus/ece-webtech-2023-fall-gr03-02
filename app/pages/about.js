@@ -17,7 +17,7 @@ export default function About() {
           </div>
           <div>
             <h3 class="mb-2 text-xl font-bold dark:text-white">Our mission</h3>
-            <p class="text-gray-500 dark:text-gray-400">Our mission is to provide a welcoming platform for esports enthusiasts, gamers, and industry professionals alike. Pinguin Esport is more than just a forum; it's a virtual arena where ideas clash, insights flourish, and the love for esports thrives.</p>
+            <p class="text-gray-500 dark:text-gray-400">Our mission is to provide a welcoming platform for esports enthusiasts, gamers, and industry professionals alike. Pinguin Esport is more than just a forum; it is a virtual arena where ideas clash, insights flourish, and the love for esports thrives.</p>
           </div>
           <div>
             <h3 class="mb-2 text-xl font-bold dark:text-white">Our Commitment</h3>

@@ -26,8 +26,8 @@ const ArticlesPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950"> 
-    /*<div className="container mx-auto my-8">
+    <div className="flex min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950"> 
+    <div className="container mx-auto my-8">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-white">Articles</h1>
         {isLoggedIn && (

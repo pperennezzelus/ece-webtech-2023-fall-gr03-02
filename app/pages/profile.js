@@ -130,7 +130,7 @@ const ProfilePage = () => {
   );
 
   const renderAvatarField = () => (
-    <div className="bg-blue-500 p-4 flex flex-col items-center justify-start rounded-l-lg h-full">
+    <div className="bg-black bg-opacity-40 p-4 flex flex-col items-center justify-start rounded-l-lg h-full">
       {avatarEditMode ? (
         <input
           type="text"
@@ -160,7 +160,8 @@ const ProfilePage = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto my-10">
+    <div className="min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950 items-center justify-center">
+    <div className="max-w-4xl mx-auto">
       <div className="flex rounded-lg shadow-md overflow-hidden">
         <div className="w-1/3">{renderAvatarField()}</div>
         <div className="flex-grow bg-white p-6">
@@ -173,6 +174,7 @@ const ProfilePage = () => {
           {renderEditableField("hobbies", "textarea")}
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -26,9 +26,10 @@ const ArticlesPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto my-8">
+    <div className="min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950"> 
+    /*<div className="container mx-auto my-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Articles</h1>
+        <h1 className="text-2xl font-bold text-white">Articles</h1>
         {isLoggedIn && (
           <button
             onClick={() => router.push("/create-article")}
@@ -39,22 +40,22 @@ const ArticlesPage = () => {
         )}
       </div>
 
-      <div className="mt-6">
+      <div className="mt-6 ">
         {articles.map((article) => (
           <div
             key={article.id}
-            className="mb-4 p-4 border border-gray-200 rounded-md"
+            className="mb-4 p-4 border border-gray-800 rounded-md bg-black bg-opacity-40"
           >
             <a
               href={`/articles/${article.id}`}
-              className="text-xl font-semibold hover:underline"
+              className="text-xl font-semibold hover:underline text-white"
             >
               {article.title}
             </a>
             <p className="text-gray-600">
               Published on {new Date(article.created_at).toLocaleDateString()}
             </p>
-            <div className="mt-2">
+            <div className="mt-2 text-white">
               {article.content.length > 200
                 ? `${article.content.substring(0, 200)}...`
                 : article.content}
@@ -62,6 +63,7 @@ const ArticlesPage = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

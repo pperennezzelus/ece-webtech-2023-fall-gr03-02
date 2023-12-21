@@ -16,7 +16,8 @@ const LoginPage = () => {
   }, [user, router]);
 
   return (
-    <div className="container mx-auto mt-8 p-8 bg-white rounded-md shadow-md max-w-md">
+    <div className="flex items-center justify-center min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
+    <div className="container mx-auto mt-8 p-8 bg-white rounded-md shadow-md max-w-md mb-64">
       <h1 className="text-3xl font-semibold mb-6">Login to Your Account</h1>
       <Auth
         supabaseClient={supabase}
@@ -24,6 +25,7 @@ const LoginPage = () => {
         providers={["github"]}
         redirectTo="localhost:3000/profile"
       />
+    </div>
     </div>
   );
 };

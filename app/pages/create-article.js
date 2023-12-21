@@ -32,6 +32,7 @@ const CreateArticlePage = () => {
   };
 
   return (
+    <div className="flex min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
     <div className="container mx-auto my-8 p-6 bg-white rounded-md shadow-md">
       <h1 className="text-3xl font-bold mb-6">Create New Article</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -92,6 +93,7 @@ const CreateArticlePage = () => {
           Create Article
         </button>
       </form>
+    </div>
     </div>
   );
 };

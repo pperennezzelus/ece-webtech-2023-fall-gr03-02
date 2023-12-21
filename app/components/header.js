@@ -2,81 +2,69 @@ import React from "react";
 import { useUser } from "./UserContext";
 import Link from "next/link";
 import Image from "next/image";
+import { MdArticle, MdContactSupport } from "react-icons/md";
+import { IoMdLogIn } from "react-icons/io";
+import { CgProfile, CgMoreO } from "react-icons/cg";
+import { RiLogoutCircleLine } from "react-icons/ri";
+
 
 const Header = () => {
   const { user, logout, isLoggedIn } = useUser();
 
   return (
-    <header className="shadow-md bg-white sticky top-0 z-10">
-      <nav className="container mx-auto flex items-center justify-between py-4 px-6">
-        <Link href="/" passHref>
-          <span className="flex items-center">
-            <Image src="/logo.png" alt="Logo" width={40} height={40} priority />
-            <span className="ml-3 text-xl font-bold text-gray-800">
-              Pinguin Motors
-            </span>
-          </span>
+    <div className="fixed top-0 left-0 h-screen w-24 flex flex-col bg-white dark:bg-gray-900 shadow-lg">
+      <Link href="/" passHref>
+        <Image src="/logo.png" alt="Logo" width={32} height={32} priority className="flex items-center justify-center mt-3 mb-2 mx-auto  " />
+      </Link>
+      <div className="mt-2">
+        <Link href="/articles" passHref>
+          <div className="icon-navbar group mt-2">
+            <span className="text-navbar group-hover:scale-100">Articles</span>
+            <MdArticle size="36" />
+          </div>
         </Link>
-        <ul className="flex items-center space-x-8">
-          <li>
-            <Link href="/" passHref>
-              <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
-                Home
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/articles" passHref>
-              <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
-                Articles
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" passHref>
-              <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
-                Contact
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" passHref>
-              <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
-                About
-              </span>
-            </Link>
-          </li>
+      </div>
+      <Link href="/contact" passHref>
+        <div className="icon-navbar group mt-2">
+          <span className="text-navbar group-hover:scale-100">Contact</span>
+          <MdContactSupport size="36" />
+        </div>
+      </Link>
 
-          {isLoggedIn ? (
-            <>
-              <li>
-                <Link href="/profile" passHref>
-                  <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
-                    Profile
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={logout}
-                  className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out focus:outline-none"
-                >
-                  Logout
-                </button>
-              </li>
-            </>
-          ) : (
-            <li>
-              <Link href="/login" passHref>
-                <span className="text-base font-medium text-gray-600 hover:text-indigo-600 transition duration-150 ease-in-out cursor-pointer">
-                  Login
-                </span>
-              </Link>
-            </li>
-          )}
-        </ul>
-      </nav>
-    </header>
+      <Link href="/about" passHref>
+        <div className="icon-navbar group mt-2">
+          <span className="text-navbar group-hover:scale-100">About</span>
+          <CgMoreO size="36" />
+        </div>
+      </Link>
+
+      {isLoggedIn ? (
+        <>
+          <Link href="/profile" passHref>
+            <div className="icon-navbar group mt-2">
+              <span className="text-navbar group-hover:scale-100">Profile</span>
+              <CgProfile size="36" />
+            </div>
+          </Link>
+          <div className="icon-navbar group mt-2">
+            <RiLogoutCircleLine size="36"
+              onClick={logout}
+            />
+            <span className="text-navbar group-hover:scale-100">Logout</span>
+          </div>
+        </>
+      ) : (
+
+        <Link href="/login" passHref>
+          <div className="icon-navbar group mt-2">
+            <span className="text-navbar group-hover:scale-100">Login</span>
+            <IoMdLogIn size="36" />
+          </div>
+
+        </Link>
+
+      )}
+    </div>
   );
 };
 

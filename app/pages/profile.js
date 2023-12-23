@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useUser } from "../components/UserContext";
 import { supabase } from "../utils/supabaseClient";
 import Image from "next/image";
+import { FiEdit, FiCheck } from "react-icons/fi"; // Import icons from react-icons
 
 const ProfilePage = () => {
   const { user, isLoggedIn } = useUser();
@@ -17,6 +18,7 @@ const ProfilePage = () => {
     hobbies: "",
   });
   const [editingField, setEditingField] = useState(null);
+  const [editMode, setEditMode] = useState(false); // New state variable for edit mode
   const [avatarEditMode, setAvatarEditMode] = useState(false);
 
   useEffect(() => {
@@ -44,6 +46,7 @@ const ProfilePage = () => {
 
   const handleEditClick = (fieldName) => {
     setEditingField(fieldName);
+    setEditMode(true);
   };
 
   const handleSaveClick = async (fieldName) => {
@@ -58,6 +61,8 @@ const ProfilePage = () => {
     } else {
       alert("Profile updated successfully!");
     }
+
+    setEditMode(false);
   };
 
   const handleAvatarEditClick = () => {
@@ -84,10 +89,7 @@ const ProfilePage = () => {
   };
 
   const renderEditableField = (fieldName, fieldType = "text") => (
-    <div className="flex items-center py-2">
-      <span className="font-medium mr-2">
-        {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}:
-      </span>
+    <div className="relative mb-6 rounded bg-gray-800 p-4">
       {editingField === fieldName ? (
         fieldType === "textarea" ? (
           <textarea
@@ -95,7 +97,7 @@ const ProfilePage = () => {
             value={profileData[fieldName]}
             onChange={handleChange}
             rows={3}
-            className="text-sm flex-grow mr-2"
+            className="w-full p-2 text-white bg-transparent border-b border-white focus:outline-none focus:border-blue-500"
           ></textarea>
         ) : (
           <input
@@ -103,69 +105,67 @@ const ProfilePage = () => {
             name={fieldName}
             value={profileData[fieldName]}
             onChange={handleChange}
-            className="text-sm flex-grow mr-2"
+            className="w-full p-2 text-white bg-transparent border-b border-white focus:outline-none focus:border-blue-500"
           />
         )
       ) : (
-        <span
-          className={`flex-grow text-sm ${
-            !profileData[fieldName] ? "text-gray-400" : ""
-          }`}
-        >
-          {profileData[fieldName] ||
-            (fieldType === "textarea" ? "Enter " + fieldName : "")}
-        </span>
+        <div className="flex items-center">
+          <span className="text-white">
+            {profileData[fieldName] || "Enter " + fieldName}
+          </span>
+          <button
+            onClick={() => handleEditClick(fieldName)}
+            className="ml-2 bg-transparent text-blue-500 hover:text-blue-600"
+          >
+            {editMode && editingField === fieldName ? <FiCheck /> : <FiEdit />}
+          </button>
+        </div>
       )}
-      <button
-        onClick={() =>
-          editingField === fieldName
-            ? handleSaveClick(fieldName)
-            : handleEditClick(fieldName)
-        }
-        className="text-gray-500 hover:text-blue-600"
-      >
-        {editingField === fieldName ? "✓" : "✏️"}
-      </button>
     </div>
   );
 
   const renderAvatarField = () => (
-    <div className="bg-black bg-opacity-40 p-4 flex flex-col items-center justify-start rounded-l-lg h-full">
+    <div className="bg-black bg-opacity-40 p-4 flex flex-col items-center justify-start rounded-lg h-full">
       {avatarEditMode ? (
         <input
           type="text"
           name="avatar_url"
           value={profileData.avatar_url}
           onChange={handleChange}
-          className="text-sm mb-2"
+          className="w-full p-2 text-white bg-transparent border-b border-white focus:outline-none focus:border-blue-500 mb-2"
         />
       ) : (
         <div className="w-32 h-32 rounded-full mb-4 overflow-hidden relative">
           <Image
             src={profileData.avatar_url || "/default-avatar.png"}
             alt="Avatar"
-            layout="fill" // This tells Next.js to fill the parent container
-            objectFit="cover" // This scales the image nicely to cover the area
+            layout="fill"
+            objectFit="cover"
             unoptimized={true}
           />
         </div>
       )}
-      <button
-        onClick={avatarEditMode ? handleAvatarSaveClick : handleAvatarEditClick}
-        className="text-gray-500 hover:text-blue-600"
-      >
-        {avatarEditMode ? "✓" : "✏️"}
-      </button>
+      <div className="flex items-center">
+        <button
+          onClick={
+            avatarEditMode ? handleAvatarSaveClick : handleAvatarEditClick
+          }
+          className="text-white hover:text-blue-600"
+        >
+          {avatarEditMode ? <FiCheck /> : <FiEdit />}{" "}
+        </button>
+      </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950 items-center justify-center">
-    <div className="max-w-4xl mx-auto">
-      <div className="flex rounded-lg shadow-md overflow-hidden">
-        <div className="w-1/3">{renderAvatarField()}</div>
-        <div className="flex-grow bg-white p-6">
-          <h2 className="text-2xl font-bold mb-4">User Profile</h2>
+    <div className="min-h-screen bg-gradient-to-b from-gray-800 to-blue-900 flex items-center justify-center">
+      <div className="max-w-lg w-full p-6 bg-black bg-opacity-40 rounded shadow-lg">
+        <h2 className="text-2xl font-bold text-white mb-6 text-center">
+          User Profile
+        </h2>
+        <div>
+          {renderAvatarField()}
           {renderEditableField("name")}
           {renderEditableField("lastname")}
           {renderEditableField("age", "number")}
@@ -174,7 +174,6 @@ const ProfilePage = () => {
           {renderEditableField("hobbies", "textarea")}
         </div>
       </div>
-    </div>
     </div>
   );
 };

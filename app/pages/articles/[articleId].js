@@ -1,4 +1,3 @@
-// pages/articles/[articleId].js
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { supabase } from "../../utils/supabaseClient";
@@ -19,15 +18,19 @@ const ArticlePage = ({ article }) => {
     }
 
     const fetchComments = async () => {
-      const { data, error } = await supabase
-        .from("comments")
-        .select("*")
-        .eq("article_id", article.id);
+      try {
+        const { data, error } = await supabase
+          .from("comments")
+          .select("*")
+          .eq("article_id", article.id);
 
-      if (error) {
-        console.error("Error fetching comments:", error);
-      } else {
+        if (error) {
+          throw error;
+        }
+
         setComments(data);
+      } catch (error) {
+        console.error("Error fetching comments:", error.message);
       }
     };
 
@@ -38,40 +41,48 @@ const ArticlePage = ({ article }) => {
     e.preventDefault();
     if (!newComment.trim()) return;
 
-    const { data, error } = await supabase
-      .from("comments")
-      .insert([
-        {
-          article_id: article.id,
-          user_id: user.id,
-          comment: newComment.trim(),
-        },
-      ])
-      .single();
+    try {
+      const { data, error } = await supabase
+        .from("comments")
+        .insert([
+          {
+            article_id: article.id,
+            user_id: user.id,
+            comment: newComment.trim(),
+          },
+        ])
+        .single();
 
-    if (error) {
-      console.error("Error posting comment:", error);
-    } else {
-      setComments((comments) => [...comments, data]);
+      if (error) {
+        throw error;
+      }
+
+      setComments([...comments, data]);
       setNewComment("");
       setShouldRefetchComments((prev) => !prev);
+    } catch (error) {
+      console.error("Error posting comment:", error.message);
     }
   };
 
   const handleDeleteComment = async (commentId) => {
-    const { error } = await supabase
-      .from("comments")
-      .delete()
-      .eq("id", commentId);
+    try {
+      const { error } = await supabase
+        .from("comments")
+        .delete()
+        .eq("id", commentId);
 
-    if (error) {
-      console.error("Error deleting comment:", error);
-    } else {
+      if (error) {
+        throw error;
+      }
+
       // Remove the deleted comment from the comments state
       setComments((comments) =>
         comments.filter((comment) => comment.id !== commentId)
       );
       setShouldRefetchComments((prev) => !prev);
+    } catch (error) {
+      console.error("Error deleting comment:", error.message);
     }
   };
 
@@ -98,7 +109,13 @@ const ArticlePage = ({ article }) => {
             key={index}
             comment={comment}
             onDelete={() => handleDeleteComment(comment.id)}
-            canDelete={isLoggedIn && comment.user_id === user?.id} // Check if the comment can be deleted by the user
+            canDelete={
+              isLoggedIn &&
+              user &&
+              comment &&
+              comment.user_id &&
+              comment.user_id === user.id
+            } // Check if the comment can be deleted by the user
           />
         ))}
         {isLoggedIn && (
@@ -124,18 +141,22 @@ const ArticlePage = ({ article }) => {
 };
 
 export async function getServerSideProps({ params }) {
-  const { data: article, error } = await supabase
-    .from("articles")
-    .select("*")
-    .eq("id", params.articleId)
-    .single();
+  try {
+    const { data: article, error } = await supabase
+      .from("articles")
+      .select("*")
+      .eq("id", params.articleId)
+      .single();
 
-  if (error) {
-    console.error("Error fetching article:", error);
+    if (error) {
+      throw error;
+    }
+
+    return { props: { article } };
+  } catch (error) {
+    console.error("Error fetching article:", error.message);
     return { props: { article: null } };
   }
-
-  return { props: { article } };
 }
 
 export default ArticlePage;

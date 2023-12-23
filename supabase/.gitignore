@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 volumes/db/data
 volumes/storage
 .env
 test.http
 docker-compose.override.yml
+=======
+# Supabase
+.branches
+.temp
+.env
+>>>>>>> main

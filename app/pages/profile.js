@@ -4,6 +4,7 @@ import { useUser } from "../components/UserContext";
 import { supabase } from "../utils/supabaseClient";
 import Image from "next/image";
 import { FiEdit, FiCheck, FiX } from "react-icons/fi"; // Import icons from react-icons
+import gravatar from 'gravatar'; // Import Gravatar library
 
 const ProfilePage = () => {
   const { user, isLoggedIn } = useUser();
@@ -123,7 +124,7 @@ const ProfilePage = () => {
         ) : (
           <div className="w-32 h-32 rounded-full mb-4 overflow-hidden relative">
             <Image
-              src={profileData.avatar_url || "/default-avatar.png"}
+              src={profileData.avatar_url || gravatar.url(user?.email || '', { s: '200', r: 'pg', d: 'mm' })}
               alt="Avatar"
               layout="fill"
               objectFit="cover"

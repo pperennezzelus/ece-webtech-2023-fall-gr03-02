@@ -76,7 +76,6 @@ const ArticlePage = ({ article }) => {
         throw error;
       }
 
-      // Remove the deleted comment from the comments state
       setComments((comments) =>
         comments.filter((comment) => comment.id !== commentId)
       );
@@ -89,6 +88,8 @@ const ArticlePage = ({ article }) => {
   return (
     <div className="container mx-auto p-6 my-6 bg-black bg-opacity-40 rounded-md shadow-md">
       <h1 className="text-3xl font-bold text-white mb-4">{article.title}</h1>
+      <p className="text-white">Game: {article.game}</p>
+      <p className="text-white">Region: {article.region}</p>
       <div
         className="article-content mb-4"
         dangerouslySetInnerHTML={{ __html: article.content }}
@@ -115,7 +116,7 @@ const ArticlePage = ({ article }) => {
               comment &&
               comment.user_id &&
               comment.user_id === user.id
-            } // Check if the comment can be deleted by the user
+            }
           />
         ))}
         {isLoggedIn && (

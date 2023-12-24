@@ -25,7 +25,9 @@ export const UserProvider = ({ children }) => {
     );
 
     return () => {
-      authListener.unsubscribe();
+      if (typeof authListener === "function") {
+        authListener();
+      }
     };
   }, []);
 

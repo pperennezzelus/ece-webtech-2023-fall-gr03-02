@@ -86,56 +86,67 @@ const ArticlePage = ({ article }) => {
   };
 
   return (
-    <div className="container mx-auto p-6 my-6 bg-black bg-opacity-40 rounded-md shadow-md">
-      <h1 className="text-3xl font-bold text-white mb-4">{article.title}</h1>
-      <p className="text-white">Game: {article.game}</p>
-      <p className="text-white">Region: {article.region}</p>
-      <div
-        className="article-content mb-4"
-        dangerouslySetInnerHTML={{ __html: article.content }}
-      />
-      {article.image_urls &&
-        article.image_urls.map((url, index) => (
-          <img
-            key={index}
-            src={url}
-            alt={`Image ${index + 1}`}
-            className="my-4"
-          />
-        ))}
-      <div className="comments-section mt-8">
-        <h2 className="text-2xl font-bold text-white mb-4">Comments</h2>
-        {comments.map((comment, index) => (
-          <Comment
-            key={index}
-            comment={comment}
-            onDelete={() => handleDeleteComment(comment.id)}
-            canDelete={
-              isLoggedIn &&
-              user &&
-              comment &&
-              comment.user_id &&
-              comment.user_id === user.id
-            }
-          />
-        ))}
-        {isLoggedIn && (
-          <form onSubmit={handleSubmitComment} className="mt-4">
-            <textarea
-              className="w-full p-2 text-gray-700 border rounded-md"
-              placeholder="Add a comment..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              rows="3"
-            ></textarea>
-            <button
-              type="submit"
-              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-            >
-              Post Comment
-            </button>
-          </form>
-        )}
+    <div className="flex min-h-screen bg-cover bg-gradient-to-b from-indigo-950 to-slate-950">
+      <div className="container mx-auto p-6 my-6 bg-black bg-opacity-40 rounded-md shadow-md">
+        <h1 className="text-3xl font-bold text-white mb-4">{article.title}</h1>
+
+        {/* Game and Region with Colored Labels */}
+        <div className="mb-4">
+          <span className="inline-block bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold mr-2">
+            {article.game}
+          </span>
+          <span className="inline-block bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+            {article.region}
+          </span>
+        </div>
+
+        <div
+          className="article-content mb-4"
+          dangerouslySetInnerHTML={{ __html: article.content }}
+        />
+        {article.image_urls &&
+          article.image_urls.map((url, index) => (
+            <img
+              key={index}
+              src={url}
+              alt={`Image ${index + 1}`}
+              className="my-4"
+            />
+          ))}
+        <div className="comments-section mt-8">
+          <h2 className="text-2xl font-bold text-white mb-4">Comments</h2>
+          {comments.map((comment, index) => (
+            <Comment
+              key={index}
+              comment={comment}
+              onDelete={() => handleDeleteComment(comment.id)}
+              canDelete={
+                isLoggedIn &&
+                user &&
+                comment &&
+                comment.user_id &&
+                comment.user_id === user.id
+              }
+            />
+          ))}
+          {isLoggedIn && (
+            <form onSubmit={handleSubmitComment} className="mt-4">
+              <textarea
+                className="w-full p-2 text-gray-700 border rounded-md"
+                placeholder="Add a comment..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                rows="3"
+              ></textarea>
+              <button
+                type="submit"
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+              >
+                Post Comment
+              </button>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -87,10 +87,9 @@ const ArticlePage = ({ article }) => {
 
   return (
     <div className="flex min-h-screen bg-cover bg-gradient-to-b from-indigo-950 to-slate-950">
-      <div className="container mx-auto p-6 my-6 bg-black bg-opacity-40 rounded-md shadow-md">
-        <h1 className="text-3xl font-bold text-white mb-4">{article.title}</h1>
+      <div className="container mx-auto p-6 my-6 bg-black bg-opacity-40 rounded-md shadow-md text-white">
+        <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
 
-        {/* Game and Region with Colored Labels */}
         <div className="mb-4">
           <span className="inline-block bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold mr-2">
             {article.game}
@@ -114,7 +113,7 @@ const ArticlePage = ({ article }) => {
             />
           ))}
         <div className="comments-section mt-8">
-          <h2 className="text-2xl font-bold text-white mb-4">Comments</h2>
+          <h2 className="text-2xl font-bold mb-4">Comments</h2>
           {comments.map((comment, index) => (
             <Comment
               key={index}

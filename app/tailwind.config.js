@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -26,6 +27,11 @@ module.exports = {
       colors: {
         primary: "#5A67D8",
         secondary: "#E53E3E",
+        dark: {
+          background: "#1a202c",
+          text: "#e2e8f0",
+          accent: "#4299e1",
+        },
       },
       // Adding custom spacing
       spacing: {
@@ -42,4 +48,11 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
   ],
+  variants: {
+    extend: {
+      backgroundColor: ["dark"],
+      textColor: ["dark"],
+      borderColor: ["dark"],
+    },
+  },
 };

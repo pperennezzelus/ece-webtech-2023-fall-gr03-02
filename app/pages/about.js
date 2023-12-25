@@ -1,29 +1,32 @@
-import React from "react";
-import Image from "next/image"; // Import Image component
+import React, { useContext } from "react";
+import Image from "next/image"; 
+import { DarkModeContext } from '../components/DarkmodeContext'; 
 
 export default function About() {
+  const { isDarkMode } = useContext(DarkModeContext);
+
   return (
-    <div className="min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
+    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
     
       <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
         <div class="max-w-screen-md mb-8 lg:mb-16">
-          <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">About Pinguin Esport</h2>
-          <p class="text-gray-500 sm:text-xl dark:text-gray-400">A dynamic online hub where the pulse of esports beats in harmony with the passionate voices of our diverse community.</p>
+          <h2 class={`mb-4 text-4xl tracking-tight font-extrabold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>About Pinguin Esport</h2>
+          <p class={`text-gray-500 sm:text-xl ${isDarkMode ? 'dark:text-gray-400' : 'text-black'}`}>A dynamic online hub where the pulse of esports beats in harmony with the passionate voices of our diverse community.</p>
         </div>
         <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
           <div>
-            <h3 class="mb-2 text-xl font-bold dark:text-white">Our Vision</h3>
-            <p class="text-gray-500 dark:text-gray-400">At Pinguin Esport, we envision a digital space that transcends traditional boundaries, fostering a global community where esports enthusiasts converge, collaborate, and celebrate the spirit of competitive gaming. </p>
+            <h3 class={`mb-2 text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Our Vision</h3>
+            <p class={`text-gray-500 ${isDarkMode ? 'dark:text-gray-400' : 'text-black'}`}>At Pinguin Esport, we envision a digital space that transcends traditional boundaries, fostering a global community where esports enthusiasts converge, collaborate, and celebrate the spirit of competitive gaming. </p>
           </div>
           <div>
-            <h3 class="mb-2 text-xl font-bold dark:text-white">Our mission</h3>
-            <p class="text-gray-500 dark:text-gray-400">Our mission is to provide a welcoming platform for esports enthusiasts, gamers, and industry professionals alike. Pinguin Esport is more than just a forum; it is a virtual arena where ideas clash, insights flourish, and the love for esports thrives.</p>
+            <h3 class={`mb-2 text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Our mission</h3>
+            <p class={`text-gray-500 ${isDarkMode ? 'dark:text-gray-400' : 'text-black'}`}>Our mission is to provide a welcoming platform for esports enthusiasts, gamers, and industry professionals alike. Pinguin Esport is more than just a forum; it is a virtual arena where ideas clash, insights flourish, and the love for esports thrives.</p>
           </div>
           <div>
-            <h3 class="mb-2 text-xl font-bold dark:text-white">Our Commitment</h3>
-            <p class="text-gray-500 dark:text-gray-400">Pinguin Esport is committed to fostering an environment where individuality is championed and every gamer feels seen and heard. We stand firm in our dedication to promoting positive gaming experiences, free from toxicity and discrimination. </p>
+            <h3 class={`mb-2 text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Our Commitment</h3>
+            <p class={`text-gray-500 ${isDarkMode ? 'dark:text-gray-400' : 'text-black'}`}>Pinguin Esport is committed to fostering an environment where individuality is championed and every gamer feels seen and heard. We stand firm in our dedication to promoting positive gaming experiences, free from toxicity and discrimination. </p>
           </div>
-*        </div>
+        </div>
       </div>
       <div className="flex items-center justify-center">
         <Image

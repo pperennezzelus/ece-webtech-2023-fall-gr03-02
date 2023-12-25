@@ -51,13 +51,12 @@ export default function Contact() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
-    
-  <div className="container mx-auto p-4 mb-64 bg-white rounded-md shadow-md max-w-md">
-    <h1 className="text-3xl font-semibold mb-6">Contact Us</h1>
-    <form onSubmit={onSubmit} className="grid gap-4">
+      <div className="container mx-auto p-4 mb-64 bg-black bg-opacity-40 rounded-md shadow-md max-w-md">
+        <h1 className="text-3xl text-white font-semibold mb-6">Contact Us</h1>
+        <form onSubmit={onSubmit} className="grid gap-4">
           {/* First Name Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-bold text-gray-500">
               First Name
             </label>
             <input
@@ -67,14 +66,14 @@ export default function Contact() {
               onChange={(e) =>
                 setFormData({ ...formData, firstname: e.target.value })
               }
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              className="mt-1 p-2 w-full border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
               required
             />
           </div>
 
           {/* Last Name Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-bold text-gray-500">
               Last Name
             </label>
             <input
@@ -91,7 +90,7 @@ export default function Contact() {
 
           {/* Email Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-bold text-gray-500">
               Email
             </label>
             <input
@@ -108,7 +107,7 @@ export default function Contact() {
 
           {/* Message Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-bold text-gray-500">
               Message
             </label>
             <textarea
@@ -147,7 +146,9 @@ export default function Contact() {
         )}
 
         {/* Error Message */}
-        {error && <div className="text-red-500">An error occurred: {error}</div>}
+        {error && (
+          <div className="text-red-500">An error occurred: {error}</div>
+        )}
       </div>
     </div>
   );

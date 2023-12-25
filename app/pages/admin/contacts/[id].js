@@ -18,9 +18,9 @@ export default function Contacts({ id }) {
   }, [id, supabase]);
 
   return (
-    <div>
+    <div className="flex min-h-screen items-center justify-center bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
       {contact && (
-        <div className="overflow-hidden divide-y divide-slate-200 shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+        <div className="overflow-hidden divide-x divide-slate-200 shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mb-64">
           <div className="bg-slate-50">
             <dl className="grid grid-cols-[auto_1fr] px-3 py-4 [&_dt]:italic [&_dt]:text-slate-500 [&_dt]:pr-3">
               <dt>Name</dt>

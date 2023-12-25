@@ -16,8 +16,8 @@ export default function Contacts() {
   }, [supabase]);
 
   return (
-    <div>
-      <div className="not-prose -my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div className="flex min-h-screen items-center justify-center bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
+      <div className="not-prose mx-auto overflow-x-auto mb-64">
         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <table className="min-w-full divide-y divide-slate-300">

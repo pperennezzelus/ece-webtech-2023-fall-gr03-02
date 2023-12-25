@@ -6,6 +6,19 @@ html {
   font-size: 14px;
 }
 
+:root {
+  --background-color-light: #ffffff;
+  --text-color-light: #1a202c;
+  --accent-color-light: #4299e1;
+
+  --background-color-dark: #1a202c;
+  --text-color-dark: #e2e8f0;
+  --accent-color-dark: #4299e1;
+
+  --toggle-button-color: #4a5568;
+}
+
+
 @layer components {
   .icon-navbar {
     @apply relative flex items-center justify-center 
@@ -23,4 +36,23 @@ html {
     text-xl font-bold font-mono
     transition-all duration-100 scale-0 origin-left;
   }
+}
+
+body {
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+}
+
+
+body.dark-mode {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+
+.toggle-button {
+  @apply absolute bottom-4 right-4 px-4 py-2 text-sm font-medium rounded-md cursor-pointer
+    bg-gray-300 text-gray-700 hover:bg-gray-400 dark:bg-gray-700 dark:text-gray-200 
+    hover:dark:bg-gray-700 dark:hover:bg-gray-600
+    transition-all duration-300 ease-linear;
 }

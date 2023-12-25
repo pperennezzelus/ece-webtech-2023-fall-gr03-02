@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { DarkModeContext } from '../components/DarkModeContext';
 import Link from "next/link";
 import Image from "next/image";
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
+  const { isDarkMode } = useContext(DarkModeContext);
   const maxPokeId = 721;
 
   useEffect(() => {
@@ -39,19 +41,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
-      <div className="absolute top-16 right-32 font-mono font-extrabold text-8xl text-white">
-        <p>PINGUIN ESPORT</p>
-      </div>
-      <div>
-        <p className="absolute top-40 right-32 font-mono font-extrabold text-2xl text-white">
-          Empower Your Voice, Elevate Your Game
-        </p>
-        <p className="absolute top-48 right-32 font-mono font-extrabold text-2xl text-white">
-          Where Passionate Minds Unite to Share the Essence of Esports
-        </p>
-      </div>
+    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+    <div className={`absolute top-16 right-32 font-mono font-extrabold text-8xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
+      <p>PINGUIN ESPORT</p>
     </div>
+    <div>
+      <p className={`absolute top-40 right-32 font-mono font-extrabold text-2xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
+        Empower Your Voice, Elevate Your Game
+      </p>
+      <p className={`absolute top-48 right-32 font-mono font-extrabold text-2xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
+        Where Passionate Minds Unite to Share the Essence of Esports
+      </p>
+    </div>
+  </div>
 
     /*
     <div className="bg-transparent">

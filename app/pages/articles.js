@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabaseClient";
 import { useUser } from "../components/UserContext";
+import { DarkModeContext } from '../components/DarkModeContext'; 
 
 const ArticlesPage = () => {
   const [articles, setArticles] = useState([]);
@@ -10,6 +11,7 @@ const ArticlesPage = () => {
   const [orderDescending, setOrderDescending] = useState(true);
   const { user, isLoggedIn } = useUser();
   const router = useRouter();
+  const { isDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -42,8 +44,8 @@ const ArticlesPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-cover bg-gradient-to-b from-indigo-950 to-slate-950">
-      <div className="container mx-auto my-8">
+    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+      <div className={`py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 ${isDarkMode ? 'text-black' : 'text-gray-900'}`}>
         {/* Filters and Create Article Button */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex gap-4">
@@ -104,10 +106,10 @@ const ArticlesPage = () => {
                   {article.region}
                 </span>
               </div>
-              <p className="text-gray-400">
+              <p className={`text-gray-500 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 Published on {new Date(article.created_at).toLocaleDateString()}
               </p>
-              <div className="mt-2 text-white">
+              <div className={`mt-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 {article.content.length > 200
                   ? `${article.content.substring(0, 200)}...`
                   : article.content}

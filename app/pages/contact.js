@@ -1,9 +1,10 @@
-// pages/contact.js
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { DarkModeContext } from '../components/DarkModeContext';
 
 export default function Contact() {
   const supabase = useSupabaseClient();
+  const { isDarkMode } = useContext(DarkModeContext);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -12,6 +13,7 @@ export default function Contact() {
   });
   const [message, setMessage] = useState(null); // State for success message
   const [error, setError] = useState(null); // State for error message
+
 
   const onSubmit = async function (e) {
     e.preventDefault();
@@ -50,13 +52,13 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
-      <div className="container mx-auto p-4 mb-64 bg-black bg-opacity-40 rounded-md shadow-md max-w-md">
-        <h1 className="text-3xl text-white font-semibold mb-6">Contact Us</h1>
+    <div className={`flex items-center justify-center min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+      <div className={`container mx-auto p-4 mb-64 bg-opacity-40 rounded-md shadow-md max-w-md ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+        <h1 className={`text-3xl font-semibold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Contact Us</h1>
         <form onSubmit={onSubmit} className="grid gap-4">
           {/* First Name Field */}
           <div>
-            <label className="block text-sm font-bold text-gray-500">
+            <label className={`block text-sm font-bold ${isDarkMode ? 'text-white' : 'text-gray-500'}`}>
               First Name
             </label>
             <input
@@ -66,14 +68,14 @@ export default function Contact() {
               onChange={(e) =>
                 setFormData({ ...formData, firstname: e.target.value })
               }
-              className="mt-1 p-2 w-full border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+              className={`mt-1 p-2 w-full border ${isDarkMode ? 'border-gray-600' : 'border-gray-300'} rounded-md focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-700'}`}
               required
             />
           </div>
-
+  
           {/* Last Name Field */}
           <div>
-            <label className="block text-sm font-bold text-gray-500">
+            <label className={`block text-sm font-bold ${isDarkMode ? 'text-white' : 'text-gray-500'}`}>
               Last Name
             </label>
             <input
@@ -83,14 +85,14 @@ export default function Contact() {
               onChange={(e) =>
                 setFormData({ ...formData, lastname: e.target.value })
               }
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              className={`mt-1 p-2 w-full border ${isDarkMode ? 'border-gray-600' : 'border-gray-300'} rounded-md focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-700'}`}
               required
             />
           </div>
-
+  
           {/* Email Field */}
           <div>
-            <label className="block text-sm font-bold text-gray-500">
+            <label className={`block text-sm font-bold ${isDarkMode ? 'text-white' : 'text-gray-500'}`}>
               Email
             </label>
             <input
@@ -100,14 +102,14 @@ export default function Contact() {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              className={`mt-1 p-2 w-full border ${isDarkMode ? 'border-gray-600' : 'border-gray-300'} rounded-md focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-700'}`}
               required
             />
           </div>
-
+  
           {/* Message Field */}
           <div>
-            <label className="block text-sm font-bold text-gray-500">
+            <label className={`block text-sm font-bold ${isDarkMode ? 'text-white' : 'text-gray-500'}`}>
               Message
             </label>
             <textarea
@@ -117,11 +119,11 @@ export default function Contact() {
                 setFormData({ ...formData, message: e.target.value })
               }
               rows="4"
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              className={`mt-1 p-2 w-full border ${isDarkMode ? 'border-gray-600' : 'border-gray-300'} rounded-md focus:outline-none focus:border-blue-500 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-700'}`}
               required
             ></textarea>
           </div>
-
+  
           {/* Submit Button */}
           <div>
             <button
@@ -132,7 +134,7 @@ export default function Contact() {
             </button>
           </div>
         </form>
-
+  
         {/* Success Message */}
         {message && (
           <div
@@ -144,10 +146,10 @@ export default function Contact() {
             </div>
           </div>
         )}
-
+  
         {/* Error Message */}
         {error && (
-          <div className="text-red-500">An error occurred: {error}</div>
+          <div className={`text-red-500 ${isDarkMode ? 'text-white' : 'text-red-500'}`}>An error occurred: {error}</div>
         )}
       </div>
     </div>

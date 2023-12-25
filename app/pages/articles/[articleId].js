@@ -1,10 +1,12 @@
   import { useRouter } from "next/router";
-  import { useState, useEffect } from "react";
+  import { useState, useContext, useEffect } from "react";
   import { supabase } from "../../utils/supabaseClient";
   import { useUser } from "../../components/UserContext";
   import Comment from "../../components/Comment";
+  import { DarkModeContext } from '../../components/DarkModeContext';
 
   const ArticlePage = ({ article }) => {
+    const {isDarkMode} = useContext(DarkModeContext);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const [shouldRefetchComments, setShouldRefetchComments] = useState(false);
@@ -126,14 +128,14 @@
 
 
     return (
-      <div className="flex h-full min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
-        <div className="container mx-auto p-6 my-6 bg-black bg-opacity-40 rounded-md shadow-md">
-          <h1 className="text-3xl font-bold text-white mb-4">{article.title}</h1>
-          <p className="mb-4 text-gray-500">
+      <div className={`flex h-full min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+        <div className={`container mx-auto p-6 my-6 ${isDarkMode ? 'bg-black bg-opacity-40' : 'bg-white'} rounded-md shadow-md`}>
+          <h1 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-black'}`}>{article.title}</h1>
+          <p className={`mb-4 ${isDarkMode ? 'text-white' : 'text-gray-500'}`}>
             Published on {new Date(article.created_at).toLocaleDateString()}
           </p>
           <div
-            className="article-content mb-4 text-white"
+            className={`article-content mb-4 ${isDarkMode ? 'text-white' : 'text-black'}`}
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
           {article.image_urls &&
@@ -144,22 +146,22 @@
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setShowConfirmation(true)}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+                className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 ${isDarkMode ? 'bg-red-500' : 'bg-red-300'}`}
               >
                 Delete Article
               </button>
               {showConfirmation && (
                 <div className="flex space-x-4">
-                  <p className="text-white">Are you sure?</p>
+                  <p className={`text-white ${isDarkMode ? 'text-white' : 'text-black'}`}>Are you sure?</p>
                   <button
                     onClick={handleDeleteArticle}
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+                    className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 ${isDarkMode ? 'bg-red-500' : 'bg-red-300'}`}
                   >
                     Yes
                   </button>
                   <button
                     onClick={() => setShowConfirmation(false)}
-                    className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700"
+                    className={`bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 ${isDarkMode ? 'bg-gray-500' : 'bg-gray-300'}`}
                   >
                     No
                   </button>
@@ -168,7 +170,7 @@
             </div>
           )}
           <div className="comments-section mt-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Comments</h2>
+            <h2 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-black'}`}>Comments</h2>
             {comments.map((comment, index) => (
               <Comment
                 key={index}
@@ -186,7 +188,7 @@
             {isLoggedIn && (
               <form onSubmit={handleSubmitComment} className="mt-4">
                 <textarea
-                  className="w-full p-2 text-gray-500 border rounded-md"
+                  className={`w-full p-2 border rounded-md ${isDarkMode ? 'text-white bg-gray-800' : 'text-gray-500 bg-white'}`}
                   placeholder="Add a comment..."
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
@@ -194,7 +196,7 @@
                 ></textarea>
                 <button
                   type="submit"
-                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                  className={`mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 ${isDarkMode ? 'bg-blue-500' : 'bg-blue-300'}`}
                 >
                   Post Comment
                 </button>

@@ -1,37 +1,62 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import { supabase } from "../utils/supabaseClient";
 import { useUser } from "../components/UserContext";
+import Footer from "../components/footer";
+
+// Import Quill's CSS
+import "react-quill/dist/quill.snow.css";
+
+// Dynamically import Quill only on the client-side
+const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
+
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, false] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link", "image"],
+    ["clean"],
+  ],
+};
+
+const formats = [
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "link",
+  "image",
+];
 
 const CreateArticlePage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageUrls, setImageUrls] = useState([]);
   const [game, setGame] = useState("");
   const [region, setRegion] = useState("");
   const router = useRouter();
   const { user } = useUser();
 
-  const handleImageUrlsChange = (e) => {
-    const urls = e.target.value.split(",").map((url) => url.trim());
-    setImageUrls(urls);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase
-      .from("articles")
-      .insert([
-        {
-          user_id: user.id,
-          title,
-          content,
-          image_urls: imageUrls,
-          game,
-          region,
-        },
-      ]);
+    const { error } = await supabase.from("articles").insert([
+      {
+        user_id: user.id,
+        title,
+        content,
+        game,
+        region,
+      },
+    ]);
 
     if (error) {
       console.error("Error creating article:", error);
@@ -43,12 +68,14 @@ const CreateArticlePage = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
-      <div className="container mx-auto my-8 p-6 bg-white rounded-md shadow-md">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-indigo-950 to-slate-950">
+      <div
+        className="container mx-auto my-8 p-6 bg-white rounded-md shadow-md"
+        style={{ maxWidth: "900px" }}
+      >
         <h1 className="text-3xl font-bold mb-6">Create New Article</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Title Field */}
-          <div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="mb-4">
             <label
               htmlFor="title"
               className="block text-sm font-medium text-gray-700"
@@ -65,43 +92,23 @@ const CreateArticlePage = () => {
               className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
-          {/* Content Field */}
-          <div>
+          <div className="mb-4">
             <label
               htmlFor="content"
               className="block text-sm font-medium text-gray-700"
             >
               Content
             </label>
-            <textarea
-              id="content"
-              name="content"
-              rows="6"
-              required
+            <QuillNoSSRWrapper
+              theme="snow"
+              modules={modules}
+              formats={formats}
               value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            ></textarea>
-          </div>
-          {/* Image URLs Field */}
-          <div>
-            <label
-              htmlFor="imageUrls"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Image URLs (comma separated)
-            </label>
-            <input
-              type="text"
-              id="imageUrls"
-              name="imageUrls"
-              value={imageUrls.join(", ")}
-              onChange={handleImageUrlsChange}
-              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              onChange={setContent}
+              style={{ height: "400px", background: "white" }}
             />
           </div>
-          {/* Game Dropdown */}
-          <div>
+          <div className="mb-4">
             <label
               htmlFor="game"
               className="block text-sm font-medium text-gray-700"
@@ -122,8 +129,7 @@ const CreateArticlePage = () => {
               <option value="Rocket League">Rocket League</option>
             </select>
           </div>
-          {/* Region Dropdown */}
-          <div>
+          <div className="mb-4">
             <label
               htmlFor="region"
               className="block text-sm font-medium text-gray-700"
@@ -145,15 +151,17 @@ const CreateArticlePage = () => {
               <option value="North America">North America</option>
             </select>
           </div>
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Create Article
-          </button>
+          <div className="flex justify-center mt-6">
+            <button
+              type="submit"
+              className="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Create Article
+            </button>
+          </div>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

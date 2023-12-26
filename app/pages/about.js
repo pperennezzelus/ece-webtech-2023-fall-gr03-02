@@ -5,7 +5,7 @@ export default function About() {
   const { isDarkMode } = useContext(DarkModeContext);
 
   return (
-    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
     
       <div className={`py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
         <div className="max-w-screen-md mb-8 lg:mb-16">

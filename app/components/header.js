@@ -16,7 +16,7 @@ const Header = () => {
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   return (
-    <div className={`fixed top-0 left-0 h-screen w-24 flex flex-col bg-white ${isDarkMode ? 'dark:bg-gray-900' : ''} shadow-lg`}>
+    <div className={`fixed top-0 left-0 h-screen w-24 flex flex-col ${isDarkMode ? 'dark:bg-gray-900' : 'bg-indigo-200'} shadow-lg`}>
       <Link href="/" passHref>
         <Image src="/logo.png" alt="Logo" width={32} height={32} priority className="flex items-center justify-center mt-3 mb-2 mx-auto" />
       </Link>

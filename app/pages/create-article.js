@@ -71,7 +71,7 @@ const CreateArticlePage = () => {
   };
 
   return (
-    <div className={`flex flex-col min-h-screen ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+    <div className={`flex flex-col min-h-screen ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
       <div
         className={`container mx-auto my-8 p-6 rounded-md shadow-md ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
         style={{ maxWidth: "900px" }}

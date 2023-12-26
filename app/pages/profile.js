@@ -142,7 +142,7 @@ const ProfilePage = () => {
   );
 
   return (
-    <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+    <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
       <div className={`max-w-lg w-full p-6 rounded shadow-lg ${isDarkMode ? 'bg-black bg-opacity-40' : 'bg-white'}`}>
         <h2 className={`text-2xl font-bold mb-6 text-center ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
           User Profile

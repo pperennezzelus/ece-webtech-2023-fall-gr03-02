@@ -128,7 +128,7 @@
 
 
     return (
-      <div className={`flex h-full min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+      <div className={`flex h-full min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
         <div className={`container mx-auto p-6 my-6 ${isDarkMode ? 'bg-black bg-opacity-40' : 'bg-white'} rounded-md shadow-md`}>
           <h1 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-black'}`}>{article.title}</h1>
           <p className={`mb-4 ${isDarkMode ? 'text-white' : 'text-gray-500'}`}>
@@ -152,7 +152,7 @@
               </button>
               {showConfirmation && (
                 <div className="flex space-x-4">
-                  <p className={`text-white ${isDarkMode ? 'text-white' : 'text-black'}`}>Are you sure?</p>
+                  <p className={`${isDarkMode ? 'text-white' : 'text-black'}`}>Are you sure?</p>
                   <button
                     onClick={handleDeleteArticle}
                     className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 ${isDarkMode ? 'bg-red-500' : 'bg-red-300'}`}

@@ -23,7 +23,7 @@ html {
   .icon-navbar {
     @apply relative flex items-center justify-center 
     h-16 w-16 mt-2 mb-2 mx-auto  
-    bg-indigo-400 hover:bg-indigo-600 dark:bg-gray-800 
+    bg-indigo-700 hover:bg-indigo-600 dark:bg-gray-800 
     text-indigo-500 hover:text-white
     hover:rounded-xl rounded-3xl
     transition-all duration-300 ease-linear

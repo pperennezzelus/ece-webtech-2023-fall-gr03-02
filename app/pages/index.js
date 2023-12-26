@@ -41,7 +41,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
     <div className={`absolute top-16 right-32 font-mono font-extrabold text-8xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
       <p>PINGUIN ESPORT</p>
     </div>

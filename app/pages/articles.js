@@ -44,7 +44,7 @@ const ArticlesPage = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
       <div className={`py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 ${isDarkMode ? 'text-black' : 'text-gray-900'}`}>
         {/* Filters and Create Article Button */}
         <div className="flex justify-between items-center mb-4">
@@ -90,11 +90,11 @@ const ArticlesPage = () => {
           {articles.map((article) => (
             <div
               key={article.id}
-              className="mb-4 p-4 border border-gray-800 rounded-md bg-black bg-opacity-40"
+              className={`mb-4 p-4 border border-gray-800 rounded-md  ${isDarkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-40'}`}
             >
               <a
                 href={`/articles/${article.id}`}
-                className="text-xl font-semibold hover:underline text-white"
+                className={`text-xl font-semibold hover:underline ${isDarkMode ? 'text-white' : 'text-black'}`}
               >
                 {article.title}
               </a>

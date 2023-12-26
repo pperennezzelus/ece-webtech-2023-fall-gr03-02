@@ -52,7 +52,7 @@ export default function Contact() {
   };
 
   return (
-    <div className={`flex items-center justify-center min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
+    <div className={`flex items-center justify-center min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
       <div className={`container mx-auto p-4 mb-64 bg-opacity-40 rounded-md shadow-md max-w-md ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
         <h1 className={`text-3xl font-semibold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Contact Us</h1>
         <form onSubmit={onSubmit} className="grid gap-4">

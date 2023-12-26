@@ -4,6 +4,7 @@
   import { useUser } from "../../components/UserContext";
   import Comment from "../../components/Comment";
   import { DarkModeContext } from '../../components/DarkModeContext';
+  import Link from "next/link";
 
   const ArticlePage = ({ article }) => {
     const {isDarkMode} = useContext(DarkModeContext);
@@ -143,13 +144,21 @@
               <img key={index} src={url} alt={`Image ${index + 1}`} className="my-4" />
             ))}
           {isLoggedIn && user && user.id === article.user_id && (
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setShowConfirmation(true)}
-                className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 ${isDarkMode ? 'bg-red-500' : 'bg-red-300'}`}
-              >
-                Delete Article
+          <div className="flex items-center space-x-4">
+            {/* Add the "Edit Article" Link */}
+            <Link href={`/update-article/${article.id}`} passHref>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Edit Article
               </button>
+            </Link>
+
+            {/* Existing "Delete Article" button */}
+            <button
+              onClick={() => setShowConfirmation(true)}
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+            >
+              Delete Article
+            </button>
               {showConfirmation && (
                 <div className="flex space-x-4">
                   <p className={`${isDarkMode ? 'text-white' : 'text-black'}`}>Are you sure?</p>

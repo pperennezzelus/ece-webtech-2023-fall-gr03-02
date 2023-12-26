@@ -1,15 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState,useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { supabase } from "../utils/supabaseClient";
-import { useUser } from "../components/UserContext";
-import Footer from "../components/footer";
-import { DarkModeContext } from '../components/DarkModeContext'; 
+import { supabase } from "../../utils/supabaseClient";
+import { useUser } from "../../components/UserContext";
+import { DarkModeContext } from '../../components/DarkModeContext';
 
-// Import Quill's CSS
 import "react-quill/dist/quill.snow.css";
 
-// Dynamically import Quill only on the client-side
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
@@ -38,36 +35,86 @@ const formats = [
   "image",
 ];
 
-const CreateArticlePage = () => {
+const UpdateArticlePage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [game, setGame] = useState("");
   const [region, setRegion] = useState("");
+  const [existingArticle, setExistingArticle] = useState(null);
+  const {isDarkMode} = useContext(DarkModeContext);
+
+
   const router = useRouter();
-  const { user } = useUser();
-  const { isDarkMode } = useContext(DarkModeContext);
+  const { user, isLoggedIn } = useUser();
+
+  useEffect(() => {
+    const fetchArticleData = async () => {
+      if (!router.query.uaid) {
+        router.push("/articles");
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from("articles")
+          .select("*")
+          .eq("id", router.query.uaid)
+          .single();
+
+        if (error) {
+          console.error("Error fetching article data:", error);
+        } else {
+          setExistingArticle(data);
+        }
+      } catch (error) {
+        console.error("Error fetching article data:", error.message);
+      }
+    };
+
+    fetchArticleData();
+  }, [isLoggedIn, router.query.uaid]);
+
+  useEffect(() => {
+    if (existingArticle) {
+      setTitle(existingArticle.title);
+      setContent(existingArticle.content);
+      setGame(existingArticle.game);
+      setRegion(existingArticle.region);
+    }
+  }, [existingArticle]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase.from("articles").insert([
+    console.log("id", router.query.uaid);
+
+    const { error } = await supabase
+    .from("articles")
+    .update([
       {
-        user_id: user.id,
         title,
         content,
         game,
         region,
-      },
-    ]);
+      }
+    ])
+    .eq('id', router.query.uaid);
+  
 
     if (error) {
-      console.error("Error creating article:", error);
-      alert("Error creating article: " + error.message);
+      console.error("Error updating article:", error);
+      alert("Error updating article: " + error.message);
     } else {
-      alert("Article created successfully!");
+      alert("Article updated successfully!");
       router.push("/articles");
     }
   };
+
+  const handleCancel = () => {
+    router.push('/articles');
+  };
+
+
 
   return (
     <div className={`flex flex-col min-h-screen ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
@@ -75,7 +122,7 @@ const CreateArticlePage = () => {
         className={`container mx-auto my-8 p-6 rounded-md shadow-md ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
         style={{ maxWidth: "900px" }}
       >
-        <h1 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Create New Article</h1>
+        <h1 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Edit Article</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="mb-4">
             <label
@@ -158,7 +205,14 @@ const CreateArticlePage = () => {
               type="submit"
               className="px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Create Article
+              Edit Article
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="px-6 py-2 mx-8 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              Cancel
             </button>
           </div>
         </form>
@@ -167,4 +221,4 @@ const CreateArticlePage = () => {
   );
 };
 
-export default CreateArticlePage;
+export default UpdateArticlePage;

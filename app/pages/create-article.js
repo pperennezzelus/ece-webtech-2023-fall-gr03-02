@@ -4,9 +4,7 @@ import dynamic from "next/dynamic";
 import { supabase } from "../utils/supabaseClient";
 import { useUser } from "../components/UserContext";
 import Footer from "../components/footer";
-import { DarkModeContext } from '../components/DarkModeContext'; 
-
-// Import Quill's CSS
+import { DarkModeContext } from "../components/DarkModeContext";
 import "react-quill/dist/quill.snow.css";
 
 // Dynamically import Quill only on the client-side
@@ -43,12 +41,33 @@ const CreateArticlePage = () => {
   const [content, setContent] = useState("");
   const [game, setGame] = useState("");
   const [region, setRegion] = useState("");
+  const [imageFile, setImageFile] = useState(null); // State for the image file
   const router = useRouter();
   const { user } = useUser();
   const { isDarkMode } = useContext(DarkModeContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let image_url = null;
+
+    if (imageFile) {
+      const fileExt = imageFile.name.split(".").pop();
+      const fileName = imageFile.name; // Use original file name
+      const filePath = `article-images/${user.id}/${fileName}`;
+
+      let { error: uploadError } = await supabase.storage
+        .from("article-images")
+        .upload(filePath, imageFile);
+
+      if (uploadError) {
+        console.error("Error uploading file:", uploadError);
+        alert("Error uploading file: " + uploadError.message);
+        return;
+      }
+
+      image_url = `https://epyotpxdlffdoysfwnbd.supabase.co/storage/v1/object/public/${filePath}`;
+    }
 
     const { error } = await supabase.from("articles").insert([
       {
@@ -57,6 +76,7 @@ const CreateArticlePage = () => {
         content,
         game,
         region,
+        image_urls: image_url ? [image_url] : [],
       },
     ]);
 
@@ -70,17 +90,33 @@ const CreateArticlePage = () => {
   };
 
   return (
-    <div className={`flex flex-col min-h-screen ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
+    <div
+      className={`flex flex-col min-h-screen ${
+        isDarkMode
+          ? "bg-gradient-to-b from-indigo-950 to-slate-950"
+          : "bg-gradient-to-b from-white to-slate-400"
+      }`}
+    >
       <div
-        className={`container mx-auto my-8 p-6 rounded-md shadow-md ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
+        className={`container mx-auto my-8 p-6 rounded-md shadow-md ${
+          isDarkMode ? "bg-gray-800" : "bg-white"
+        }`}
         style={{ maxWidth: "900px" }}
       >
-        <h1 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Create New Article</h1>
+        <h1
+          className={`text-3xl font-bold mb-6 ${
+            isDarkMode ? "text-white" : "text-gray-900"
+          }`}
+        >
+          Create New Article
+        </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="mb-4">
             <label
               htmlFor="title"
-              className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-700'}`}
+              className={`block text-sm font-medium ${
+                isDarkMode ? "text-white" : "text-gray-700"
+              }`}
             >
               Title
             </label>
@@ -91,13 +127,18 @@ const CreateArticlePage = () => {
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-700'}`}
+              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-700"
+              }`}
             />
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="content"
-              className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-700'}`}
+              className={`block text-sm font-medium ${
+                isDarkMode ? "text-white" : "text-gray-700"
+              }`}
             >
               Content
             </label>
@@ -107,13 +148,20 @@ const CreateArticlePage = () => {
               formats={formats}
               value={content}
               onChange={setContent}
-              style={{ height: "400px", background: isDarkMode ? "white" : "white", color: isDarkMode ? "black" : "black" }}
+              style={{
+                height: "400px",
+                background: isDarkMode ? "gray" : "white",
+                color: isDarkMode ? "white" : "black",
+              }}
             />
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="game"
-              className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-700'}`}
+              className={`block text-sm font-medium ${
+                isDarkMode ? "text-white" : "text-gray-700"
+              }`}
             >
               Game
             </label>
@@ -123,7 +171,9 @@ const CreateArticlePage = () => {
               required
               value={game}
               onChange={(e) => setGame(e.target.value)}
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-700'}`}
+              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-700"
+              }`}
             >
               <option value="">Select a Game</option>
               <option value="League of Legends">League of Legends</option>
@@ -131,10 +181,13 @@ const CreateArticlePage = () => {
               <option value="Rocket League">Rocket League</option>
             </select>
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="region"
-              className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-700'}`}
+              className={`block text-sm font-medium ${
+                isDarkMode ? "text-white" : "text-gray-700"
+              }`}
             >
               Region
             </label>
@@ -144,7 +197,9 @@ const CreateArticlePage = () => {
               required
               value={region}
               onChange={(e) => setRegion(e.target.value)}
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-700'}`}
+              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-700"
+              }`}
             >
               <option value="">Select a Region</option>
               <option value="China">China</option>
@@ -153,6 +208,27 @@ const CreateArticlePage = () => {
               <option value="North America">North America</option>
             </select>
           </div>
+
+          <div className="mb-4">
+            <label
+              htmlFor="cover-image"
+              className={`block text-sm font-medium ${
+                isDarkMode ? "text-white" : "text-gray-700"
+              }`}
+            >
+              Cover Image
+            </label>
+            <input
+              type="file"
+              id="cover-image"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files[0])}
+              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md ${
+                isDarkMode ? "bg-gray-700" : "bg-white"
+              }`}
+            />
+          </div>
+
           <div className="flex justify-center mt-6">
             <button
               type="submit"
@@ -163,6 +239,7 @@ const CreateArticlePage = () => {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

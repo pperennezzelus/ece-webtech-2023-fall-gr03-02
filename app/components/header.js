@@ -29,7 +29,7 @@ const Header = () => {
       if (searchQuery.length > 2) {
         try {
           const results = await searchArticles(searchQuery);
-          console.log(results); // Add this line to debug
+          console.log(results);
           setSearchResults(results);
         } catch (error) {
           console.error("Error fetching search results:", error);
@@ -71,56 +71,67 @@ const Header = () => {
           </div>
           <div className="absolute top-16 w-full flex justify-center">
             {/* Display search results */}
-            {searchResults.map((article) => (
-              <div key={article.id} className="bg-white p-2 m-1">
-                <Link href={`/articles/${article.id}`}>
-                  <div className="cursor-pointer">{article.title}</div>
+            <div className="space-y-2 max-w-md">
+              {searchResults.map((article) => (
+                <Link
+                  key={article.id}
+                  href={`/articles/${article.id}`}
+                  className="flex items-center bg-white p-2 rounded-lg shadow hover:shadow-md transition-shadow duration-200 ease-in-out"
+                  passHref
+                >
+                  <div className="w-12 h-12 relative mr-2">
+                    <Image
+                      src={
+                        article.image_urls && article.image_urls.length > 0
+                          ? article.image_urls[0]
+                          : "pinguin_squad.png" //default image
+                      }
+                      alt={article.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-md"
+                    />
+                  </div>
+                  <div className="truncate">
+                    <h2 className="text-sm font-semibold">{article.title}</h2>
+                  </div>
                 </Link>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       )}
 
       {/* Logo */}
-      <Link href="/">
-        <div className="flex items-center justify-center mt-3 mb-2 mx-auto">
-          <Image src="/logo.png" alt="Logo" width={32} height={32} priority />
-        </div>
+      <Link
+        href="/"
+        className="flex items-center justify-center mt-3 mb-2 mx-auto"
+      >
+        <Image src="/logo.png" alt="Logo" width={32} height={32} priority />
       </Link>
 
       {/* Navbar Items */}
       <div className="mt-2">
-        <Link href="/articles">
-          <div className="icon-navbar group mt-2">
-            <MdArticle size="36" />
-            <span className="text-navbar group-hover:scale-100">Articles</span>
-          </div>
+        <Link href="/articles" className="icon-navbar group mt-2">
+          <MdArticle size="36" />
+          <span className="text-navbar group-hover:scale-100">Articles</span>
         </Link>
 
-        <Link href="/contact">
-          <div className="icon-navbar group mt-2">
-            <MdContactSupport size="36" />
-            <span className="text-navbar group-hover:scale-100">Contact</span>
-          </div>
+        <Link href="/contact" className="icon-navbar group mt-2">
+          <MdContactSupport size="36" />
+          <span className="text-navbar group-hover:scale-100">Contact</span>
         </Link>
 
-        <Link href="/about">
-          <div className="icon-navbar group mt-2">
-            <CgMoreO size="36" />
-            <span className="text-navbar group-hover:scale-100">About</span>
-          </div>
+        <Link href="/about" className="icon-navbar group mt-2">
+          <CgMoreO size="36" />
+          <span className="text-navbar group-hover:scale-100">About</span>
         </Link>
 
         {isLoggedIn ? (
           <>
-            <Link href="/profile">
-              <div className="icon-navbar group mt-2">
-                <CgProfile size="36" />
-                <span className="text-navbar group-hover:scale-100">
-                  Profile
-                </span>
-              </div>
+            <Link href="/profile" className="icon-navbar group mt-2">
+              <CgProfile size="36" />
+              <span className="text-navbar group-hover:scale-100">Profile</span>
             </Link>
             <div
               className="icon-navbar group mt-2 cursor-pointer"
@@ -131,11 +142,9 @@ const Header = () => {
             </div>
           </>
         ) : (
-          <Link href="/login">
-            <div className="icon-navbar group mt-2">
-              <IoMdLogIn size="36" />
-              <span className="text-navbar group-hover:scale-100">Login</span>
-            </div>
+          <Link href="/login" className="icon-navbar group mt-2">
+            <IoMdLogIn size="36" />
+            <span className="text-navbar group-hover:scale-100">Login</span>
           </Link>
         )}
       </div>

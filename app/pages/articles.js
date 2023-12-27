@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabaseClient";
 import { useUser } from "../components/UserContext";
-import { DarkModeContext } from '../components/DarkModeContext'; 
+import { DarkModeContext } from "../components/DarkModeContext";
 
 const ArticlesPage = () => {
   const [articles, setArticles] = useState([]);
@@ -44,8 +44,14 @@ const ArticlesPage = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
-      <div className={`py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 ${isDarkMode ? 'text-black' : 'text-gray-900'}`}>
+    <div
+      className={`min-h-screen ${
+        isDarkMode
+          ? "bg-gradient-to-b from-indigo-950 to-slate-950"
+          : "bg-gradient-to-b from-white to-slate-400"
+      }`}
+    >
+      <div className="container mx-auto px-4 py-8">
         {/* Filters and Create Article Button */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex gap-4">
@@ -86,34 +92,43 @@ const ArticlesPage = () => {
         </div>
 
         {/* Articles List */}
-        <div className="mt-6">
+        <div className="flex flex-wrap -mx-2">
           {articles.map((article) => (
             <div
               key={article.id}
-              className={`mb-4 p-4 border border-gray-800 rounded-md  ${isDarkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-40'}`}
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 mb-4"
             >
-              <a
-                href={`/articles/${article.id}`}
-                className={`text-xl font-semibold hover:underline ${isDarkMode ? 'text-white' : 'text-black'}`}
-              >
-                {article.title}
+              <a href={`/articles/${article.id}`}>
+                <article className="group duration-200 relative text-left cursor-pointer transform transition-transform ease-in-out hover:scale-110 shadow-xl shadow-transparent hover:shadow-white/10">
+                  <figure className="duration-200 transform transition-transform overflow-hidden rounded-xl border border-white/20 group-hover:border-white">
+                    <div
+                      style={{
+                        position: "relative",
+                        height: "180px",
+                        width: "320px",
+                      }}
+                    >
+                      <img
+                        alt={article.title}
+                        loading="lazy"
+                        width="320"
+                        height="180"
+                        className="w-full h-auto"
+                        src={
+                          article.image_urls && article.image_urls.length > 0
+                            ? article.image_urls[0]
+                            : "pinguin_squad.png" //default image
+                        }
+                        style={{ color: "transparent", display: "block" }}
+                      />
+                      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black"></div>
+                    </div>
+                  </figure>
+                  <h2 className="text-white truncate text-2xl absolute bottom-0 left-0 right-0 p-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                    {article.title}
+                  </h2>
+                </article>
               </a>
-              <div className="mt-2">
-                <span className="inline-block bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold mr-2 mb-2">
-                  {article.game}
-                </span>
-                <span className="inline-block bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold mr-2 mb-2">
-                  {article.region}
-                </span>
-              </div>
-              <p className={`text-gray-500 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                Published on {new Date(article.created_at).toLocaleDateString()}
-              </p>
-              <div className={`mt-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                {article.content.length > 200
-                  ? `${article.content.substring(0, 200)}...`
-                  : article.content}
-              </div>
             </div>
           ))}
         </div>

@@ -41,7 +41,7 @@ const CreateArticlePage = () => {
   const [content, setContent] = useState("");
   const [game, setGame] = useState("");
   const [region, setRegion] = useState("");
-  const [imageFile, setImageFile] = useState(null); // State for the image file
+  const [imageURL, setImageURL] = useState(""); // State for image URL
   const router = useRouter();
   const { user } = useUser();
   const { isDarkMode } = useContext(DarkModeContext);
@@ -49,26 +49,12 @@ const CreateArticlePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let image_url = null;
-
-    if (imageFile) {
-      const fileExt = imageFile.name.split(".").pop();
-      const fileName = imageFile.name; // Use original file name
-      const filePath = `article-images/${user.id}/${fileName}`;
-
-      let { error: uploadError } = await supabase.storage
-        .from("article-images")
-        .upload(filePath, imageFile);
-
-      if (uploadError) {
-        console.error("Error uploading file:", uploadError);
-        alert("Error uploading file: " + uploadError.message);
-        return;
-      }
-
-      image_url = `https://epyotpxdlffdoysfwnbd.supabase.co/storage/v1/object/public/${filePath}`;
+    if (!user) {
+      alert("You must be logged in to create an article.");
+      return;
     }
 
+    // Insert the article
     const { error } = await supabase.from("articles").insert([
       {
         user_id: user.id,
@@ -76,17 +62,18 @@ const CreateArticlePage = () => {
         content,
         game,
         region,
-        image_urls: image_url ? [image_url] : [],
+        image_urls: imageURL ? [imageURL] : [],
       },
     ]);
 
     if (error) {
       console.error("Error creating article:", error);
       alert("Error creating article: " + error.message);
-    } else {
-      alert("Article created successfully!");
-      router.push("/articles");
+      return;
     }
+
+    alert("Article created successfully!");
+    router.push("/articles");
   };
 
   return (
@@ -179,6 +166,7 @@ const CreateArticlePage = () => {
               <option value="League of Legends">League of Legends</option>
               <option value="Valorant">Valorant</option>
               <option value="Rocket League">Rocket League</option>
+              {/* Populate with your game options */}
             </select>
           </div>
 
@@ -206,25 +194,27 @@ const CreateArticlePage = () => {
               <option value="Europe">Europe</option>
               <option value="Korea">Korea</option>
               <option value="North America">North America</option>
+              {/* Populate with your region options */}
             </select>
           </div>
 
           <div className="mb-4">
             <label
-              htmlFor="cover-image"
+              htmlFor="cover-image-url"
               className={`block text-sm font-medium ${
                 isDarkMode ? "text-white" : "text-gray-700"
               }`}
             >
-              Cover Image
+              Cover Image URL
             </label>
             <input
-              type="file"
-              id="cover-image"
-              accept="image/*"
-              onChange={(e) => setImageFile(e.target.files[0])}
-              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md ${
-                isDarkMode ? "bg-gray-700" : "bg-white"
+              type="text"
+              id="cover-image-url"
+              name="cover-image-url"
+              value={imageURL}
+              onChange={(e) => setImageURL(e.target.value)}
+              className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-700"
               }`}
             />
           </div>

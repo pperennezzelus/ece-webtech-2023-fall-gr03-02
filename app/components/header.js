@@ -84,7 +84,7 @@ const Header = () => {
                       src={
                         article.image_urls && article.image_urls.length > 0
                           ? article.image_urls[0]
-                          : "pinguin_squad.png" //default image
+                          : "/pinguin_squad.png" //default image
                       }
                       alt={article.title}
                       layout="fill"

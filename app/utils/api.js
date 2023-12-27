@@ -29,17 +29,12 @@ export const fetchAllArticles = async () => {
 
 export const searchArticles = async (query) => {
   try {
-    let { data, error, status } = await supabase
-      .from("articles")
-      .select("id, title, game, region")
-      .or(
-        `title.ilike.%${query}%,game.ilike.%${query}%,region.ilike.%${query}%`
-      );
-
-    if (error && status !== 406) {
+    let { data, error } = await supabase.rpc("search_articles", {
+      search_query: query,
+    });
+    if (error) {
       throw error;
     }
-
     return data;
   } catch (error) {
     console.error("Error searching articles:", error.message);

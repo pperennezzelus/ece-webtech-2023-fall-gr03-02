@@ -137,8 +137,8 @@ const CreateArticlePage = () => {
               onChange={setContent}
               style={{
                 height: "400px",
-                background: isDarkMode ? "gray" : "white",
-                color: isDarkMode ? "white" : "black",
+                background: isDarkMode ? "white" : "white",
+                color: isDarkMode ? "black" : "black",
               }}
             />
           </div>

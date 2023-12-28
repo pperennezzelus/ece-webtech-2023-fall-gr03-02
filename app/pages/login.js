@@ -19,8 +19,8 @@ const LoginPage = () => {
 
   return (
     <div className={`flex items-center justify-center min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
-      <div className={`container mx-auto mt-8 p-8 rounded-md shadow-md max-w-md mb-64 ${isDarkMode ? 'bg-black bg-opacity-40' : 'bg-white'}`}>
-        <h1 className={`text-3xl font-semibold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Login to Your Account</h1>
+      <div className={`container mx-auto mt-8 p-8 rounded-md shadow-md max-w-md mb-64 ${isDarkMode ? 'bg-white' : 'bg-white'}`}>
+        <h1 className={`text-3xl font-semibold mb-6 ${isDarkMode ? 'text-gray-800' : 'text-gray-800'}`}>Login to Your Account</h1>
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}

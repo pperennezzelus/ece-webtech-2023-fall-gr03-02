@@ -55,7 +55,7 @@ const Header = () => {
 
       {/* Search Bar */}
       {isSearchOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-10">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50">
           <div className="flex justify-center items-center h-full">
             <input
               type="text"
@@ -71,7 +71,7 @@ const Header = () => {
           </div>
           <div className="absolute top-16 w-full flex justify-center">
             {/* Display search results */}
-            <div className="space-y-2 max-w-md">
+            <div className="space-y-2 max-w-md z-50">
               {searchResults.map((article) => (
                 <Link
                   key={article.id}
@@ -84,7 +84,7 @@ const Header = () => {
                       src={
                         article.image_urls && article.image_urls.length > 0
                           ? article.image_urls[0]
-                          : "/pinguin_squad.png" //default image
+                          : "/logo1black.png" //default image
                       }
                       alt={article.title}
                       layout="fill"
@@ -93,7 +93,7 @@ const Header = () => {
                     />
                   </div>
                   <div className="truncate">
-                    <h2 className="text-sm font-semibold">{article.title}</h2>
+                    <h2 className="text-sm font-semibold text-black">{article.title}</h2>
                   </div>
                 </Link>
               ))}

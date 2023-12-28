@@ -45,11 +45,10 @@ const ArticlesPage = () => {
 
   return (
     <div
-      className={`min-h-screen ${
-        isDarkMode
-          ? "bg-gradient-to-b from-indigo-950 to-slate-950"
-          : "bg-gradient-to-b from-white to-slate-400"
-      }`}
+      className={`min-h-screen ${isDarkMode
+        ? "bg-gradient-to-b from-indigo-950 to-slate-950"
+        : "bg-gradient-to-b from-white to-slate-400"
+        }`}
     >
       <div className="container mx-auto px-4 py-8">
         {/* Filters and Create Article Button */}
@@ -57,7 +56,7 @@ const ArticlesPage = () => {
           <div className="flex gap-4">
             <select
               onChange={(e) => setFilterGame(e.target.value)}
-              className="px-4 py-2 rounded-md"
+              className={`px-4 py-2 rounded-md ${isDarkMode ? "text-black" : "text-black"}`}
             >
               <option value="">Filter by Game</option>
               <option value="League of Legends">League of Legends</option>
@@ -66,7 +65,7 @@ const ArticlesPage = () => {
             </select>
             <select
               onChange={(e) => setFilterRegion(e.target.value)}
-              className="px-4 py-2 rounded-md"
+              className={`px-4 py-2 rounded-md ${isDarkMode ? "text-black" : "text-black"} w-44`}
             >
               <option value="">Filter by Region</option>
               <option value="China">China</option>
@@ -81,6 +80,7 @@ const ArticlesPage = () => {
               {orderDescending ? "Descending" : "Ascending"} Order
             </button>
           </div>
+
           {isLoggedIn && (
             <button
               onClick={() => router.push("/create-article")}
@@ -96,34 +96,33 @@ const ArticlesPage = () => {
           {articles.map((article) => (
             <div
               key={article.id}
-              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 mb-4"
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 mb-4 "
             >
               <a href={`/articles/${article.id}`}>
                 <article className="group duration-200 relative text-left cursor-pointer transform transition-transform ease-in-out hover:scale-110 shadow-xl shadow-transparent hover:shadow-white/10">
-                  <figure className="duration-200 transform transition-transform overflow-hidden rounded-xl border border-white/20 group-hover:border-white">
-                    <div
-                      style={{
-                        position: "relative",
-                        height: "180px",
-                        width: "320px",
-                      }}
-                    >
-                      <img
-                        alt={article.title}
-                        loading="lazy"
-                        width="320"
-                        height="180"
-                        className="w-full h-auto"
-                        src={
-                          article.image_urls && article.image_urls.length > 0
-                            ? article.image_urls[0]
-                            : "pinguin_squad.png" //default image
-                        }
-                        style={{ color: "transparent", display: "block" }}
-                      />
-                      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black"></div>
-                    </div>
-                  </figure>
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "180px", // Adjust this height as needed
+                      width: "100%",   // Ensure the width is set to 100%
+                    }}
+                  >
+                    <img
+                      alt={article.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover rounded-xl "
+                      src={
+                        article.image_urls && article.image_urls.length > 0
+                          ? article.image_urls[0]
+                          : isDarkMode
+                            ? "logo1.png" // default image for dark mode
+                            : "logo1black.png" // default image for light mode
+                      }
+                      style={{ color: "transparent", display: "block" }}
+                    />
+
+                    <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black"></div>
+                  </div>
                   <h2 className="text-white truncate text-2xl absolute bottom-0 left-0 right-0 p-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                     {article.title}
                   </h2>
@@ -132,6 +131,8 @@ const ArticlesPage = () => {
             </div>
           ))}
         </div>
+
+
       </div>
     </div>
   );

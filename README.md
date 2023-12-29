@@ -245,8 +245,9 @@ Vercel provides an excellent platform for deploying modern web applications with
 
 ### Course Feedback
 
-_Your feedback about the course, what you liked, what you disliked, what you missed..._
+We really like this new course for us, it was very challenging and entertaining with the labs and the final project
 
 ### Project Reuse
 
 - [x] We authorize the professors to use our project as an example for the next year students (facultative).
+ 

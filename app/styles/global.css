@@ -71,3 +71,38 @@ body.dark-mode {
 .search-result-item {
   @apply bg-white p-2 m-1;
 }
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+}
+
+.comment-action {
+  margin-right: 10px; /* Adjust the spacing as needed */
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #ff3333;
+}
+
+.reply-button {
+  background-color: #3399ff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reply-button:hover {
+  background-color: #0077ff;
+}

@@ -192,7 +192,7 @@ Vercel provides an excellent platform for deploying modern web applications with
   - Comments: [Login Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/login) Implements using OAuth2 with Supabase, using Github provider allowing users to sign in and view their profiles and edit them.
   - Task feedback: hard to implement at the beginning but now we realize how effortless it is compared to other way to login on a page with email and password old-school.
 - **Post creation and display**
-  - Grade: /6
+  - Grade: 4,5/6
   - Comments: Users can create and view posts at [Articles Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/articles), with pagination and sorting features
   - Task feedback: 
 - **Comment creation and display**
@@ -212,7 +212,7 @@ Vercel provides an excellent platform for deploying modern web applications with
   - Comments: We've integrated the [Pokemon API](https://ece-webtech-2023-fall-gr03-02.vercel.app/pokeapi) to display random Pokemon data (name and image).
   - Task feedback: Easy and funny to implement 
 - **Resource access control**
-  - Grade: 
+  - Grade: 2/6
   - Comments: Utilizing RLS policies in Supabase for secure data access and control.
   - Task feedback: 
 - **Account settings**
@@ -249,4 +249,4 @@ _Your feedback about the course, what you liked, what you disliked, what you mis
 
 ### Project Reuse
 
-- [] We authorize the professors to use our project as an example for the next year students (facultative).
+- [x] We authorize the professors to use our project as an example for the next year students (facultative).

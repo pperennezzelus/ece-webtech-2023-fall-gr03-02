@@ -192,45 +192,45 @@ Vercel provides an excellent platform for deploying modern web applications with
   - Comments: [Login Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/login) Implements using OAuth2 with Supabase, using Github provider allowing users to sign in and view their profiles and edit them.
   - Task feedback: hard to implement at the beginning but now we realize how effortless it is compared to other way to login on a page with email and password old-school.
 - **Post creation and display**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 4,5/6
+  - Comments: Users can create and view posts at [Articles Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/articles), with pagination and sorting features
+  - Task feedback: 
 - **Comment creation and display**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 4/4
+  - Comments: Each article page includes a section for users to leave comments, and reply comments inspired by GitHub issue commenting.
+  - Task feedback:
 - **Post modification and removal**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 4/4
+  - Comments: Authors can edit or delete their posts, with controls visible only to them
+  - Task feedback: 
 - **Search**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 6/6
+  - Comments: A search bar is available on all pages, performing server-side searches using Supabase's Full Text Search capabilities
+  - Task feedback: 
 - **Use an external API**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 2/2
+  - Comments: We've integrated the [Pokemon API](https://ece-webtech-2023-fall-gr03-02.vercel.app/pokeapi) to display random Pokemon data (name and image).
+  - Task feedback: Easy and funny to implement 
 - **Resource access control**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 2/6
+  - Comments: Utilizing RLS policies in Supabase for secure data access and control.
+  - Task feedback: 
 - **Account settings**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 3,5/4
+  - Comments:  Users can edit their profiles on [Profile Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/profile), including personal settings like name, age, job, biography, hobbies
+  - Task feedback: Meduim task to implement due to the interactionb with Supabase
 - **WYSIWYG integration**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 2/2
+  - Comments: On [Create Article Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/create-article)we use Quill for rich text editing in post creation and editing
+  - Task feedback: Implemented easily 
 - **Gravatar integration**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 1.5/2
+  - Comments: Gravatar icons are displayed on [Profile Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/profile), by linking a picture with his mail address
+  - Task feedback: Easy to implement but display gravatar next to the comment is a bit more difficult
 - **Light/dark mode**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 2/2
+  - Comments: sers can toggle between light and dark themes, with their preference persisted across sessions
+  - Task feedback: easy to implement but very repetitive
 
 ### Bonus Tasks
 
@@ -245,8 +245,9 @@ Vercel provides an excellent platform for deploying modern web applications with
 
 ### Course Feedback
 
-_Your feedback about the course, what you liked, what you disliked, what you missed..._
+We really like this new course for us, it was very challenging and entertaining with the labs and the final project
 
 ### Project Reuse
 
-- [ ] We authorize the professors to use our project as an example for the next year students (facultative).
+- [x] We authorize the professors to use our project as an example for the next year students (facultative).
+ 

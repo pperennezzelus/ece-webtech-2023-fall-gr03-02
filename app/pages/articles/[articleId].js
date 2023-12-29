@@ -230,7 +230,16 @@ const ArticlePage = ({ article }) => {
           {article.title}
         </h1>
         <p className={`mb-4 ${isDarkMode ? "text-white" : "text-gray-500"}`}>
-          Published on {new Date(article.created_at).toLocaleDateString()}
+          Published on {new Date(article.created_at).toLocaleDateString()} by{" "}
+          <span className={`text-green-500`}>{article.author}</span>
+          {article.game && (
+            <span className={`ml-2 text-blue-500`}>Game: {article.game}</span>
+          )}
+          {article.region && (
+            <span className={`ml-2 text-red-500`}>
+              Region: {article.region}
+            </span>
+          )}
         </p>
         <div
           className={`article-content mb-4 ${

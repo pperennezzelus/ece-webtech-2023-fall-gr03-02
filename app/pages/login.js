@@ -1,21 +1,21 @@
-import { useEffect, useContext } from "react";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { supabase } from "../utils/supabaseClient";
-import { useRouter } from "next/router";
-import { useUser } from "../components/UserContext"; 
-import { DarkModeContext } from '../components/DarkModeContext'; 
+import { useEffect, useContext } from "react"
+import { Auth } from "@supabase/auth-ui-react"
+import { ThemeSupa } from "@supabase/auth-ui-shared"
+import { supabase } from "../utils/supabaseClient"
+import { useRouter } from "next/router"
+import { useUser } from "../components/UserContext"
+import { DarkModeContext } from '../components/DarkModeContext'
 
 const LoginPage = () => {
-  const router = useRouter();
-  const { user } = useUser(); 
-  const { isDarkMode } = useContext(DarkModeContext);
+  const router = useRouter()
+  const { user } = useUser()
+  const { isDarkMode } = useContext(DarkModeContext)
 
   useEffect(() => {
     if (user) {
-      router.push("/profile");
+      router.push("/profile")
     }
-  }, [user, router]);
+  }, [user, router])
 
   return (
     <div className={`flex items-center justify-center min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
@@ -29,7 +29,6 @@ const LoginPage = () => {
         />
       </div>
     </div>
-  );
-};
-
-export default LoginPage;
+  )
+}
+export default LoginPage

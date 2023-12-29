@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MdArticle, MdContactSupport } from "react-icons/md";
 import { IoMdLogIn } from "react-icons/io";
-import { CgProfile, CgMoreO } from "react-icons/cg";
+import { CgProfile, CgMoreO, CgPokemon } from "react-icons/cg";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { FiSun, FiMoon, FiSearch } from "react-icons/fi";
 import { searchArticles } from "../utils/api";
@@ -44,9 +44,10 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 h-screen w-24 flex flex-col ${
+      className={`fixed top-0 left-0 h-screen w-24 flex flex-col z-50 ${
         isDarkMode ? "dark:bg-gray-900" : "bg-indigo-200"
       } shadow-lg`}
+  
     >
       {/* Search Icon */}
       <div className="search-icon mt-2 mx-auto">
@@ -80,7 +81,7 @@ const Header = () => {
                   passHref
                 >
                   <div className="w-12 h-12 relative mr-2">
-                    <Image
+                    <img
                       src={
                         article.image_urls && article.image_urls.length > 0
                           ? article.image_urls[0]
@@ -148,6 +149,11 @@ const Header = () => {
           </Link>
         )}
       </div>
+
+      <Link href="/pokeapi" className="icon-navbar group ">
+          <CgPokemon size="36" />
+          <span className="text-navbar group-hover:scale-100">PokeApi</span>
+        </Link>
 
       {/* Dark Mode Toggle */}
       <button

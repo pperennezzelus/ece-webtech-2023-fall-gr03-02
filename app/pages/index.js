@@ -125,23 +125,6 @@ const Home = () => {
         ))}
       </div>
     </div>
-
-
-
-    /*
-
-      <div className="container mx-auto mt-10">
-        <div id="vitrina">
-          {pokemonData.map(({ pokeName, pokeUrl }, index) => (
-            <div key={index} className="tarjeta">
-              <h1 className="text-xl font-bold mb-6">Your random pokemon is {pokeName}</h1>
-              <img src={pokeUrl} alt={pokeName} style={{ height: '150px', width: '150px' }} />
-            </div>
-          ))}
-        </div>
-
-      </div>
-      */
   );
 };
 export default Home;

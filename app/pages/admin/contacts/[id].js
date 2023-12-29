@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import md from "markdown-it";
+import { useState, useEffect } from "react"
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import md from "markdown-it"
 
 export default function Contacts({ id }) {
-  const [contact, setContact] = useState(null);
-  const supabase = useSupabaseClient();
+  const [contact, setContact] = useState(null)
+  const supabase = useSupabaseClient()
 
   useEffect(() => {
     (async () => {
@@ -12,10 +12,10 @@ export default function Contacts({ id }) {
         .from("contacts")
         .select(`id, firstname, lastname, email, message`)
         .eq("id", id)
-        .single();
-      setContact(data);
-    })();
-  }, [id, supabase]);
+        .single()
+      setContact(data)
+    })()
+  }, [id, supabase])
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-cover h-14 bg-gradient-to-b from-indigo-950 to-slate-950">
@@ -39,7 +39,7 @@ export default function Contacts({ id }) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
 export async function getServerSideProps(context) {
@@ -47,5 +47,5 @@ export async function getServerSideProps(context) {
     props: {
       id: context.params.id,
     },
-  };
+  }
 }

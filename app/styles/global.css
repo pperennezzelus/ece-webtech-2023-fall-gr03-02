@@ -33,7 +33,7 @@ html {
     @apply absolute w-auto p-2 m-3 min-w-max left-20 rounded-md shadow-md
     text-indigo-200 bg-gray-900 
     text-xl font-bold font-mono
-    transition-all duration-100 scale-0 origin-left;
+    transition-all duration-100 scale-0 origin-left z-50;
   }
 }
 

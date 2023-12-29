@@ -1,27 +1,25 @@
-import { useState, useContext } from "react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { DarkModeContext } from '../components/DarkModeContext';
+import { useState, useContext } from "react"
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import { DarkModeContext } from '../components/DarkModeContext'
 
 export default function Contact() {
-  const supabase = useSupabaseClient();
-  const { isDarkMode } = useContext(DarkModeContext);
+  const supabase = useSupabaseClient()
+  const { isDarkMode } = useContext(DarkModeContext)
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
     email: "",
     message: "",
-  });
-  const [message, setMessage] = useState(null); // State for success message
-  const [error, setError] = useState(null); // State for error message
+  })
+  const [message, setMessage] = useState(null)
+  const [error, setError] = useState(null)
 
 
   const onSubmit = async function (e) {
-    e.preventDefault();
+    e.preventDefault()
 
-    // Reset error state
-    setError(null);
+    setError(null)
 
-    // Insert contact record into the contacts database
     const { data, error } = await supabase.from("contacts").insert([
       {
         firstname: formData.firstname,
@@ -29,27 +27,25 @@ export default function Contact() {
         email: formData.email,
         message: formData.message,
       },
-    ]);
+    ])
 
     if (error) {
-      console.error("Error inserting data:", error);
-      setError(error.message); // Update error state
-      return;
+      console.error("Error inserting data:", error)
+      setError(error.message)
+      return
     }
 
-    console.log("Inserted data:", data); // Log inserted data
+    console.log("Inserted data:", data)
 
-    // Reset form data to initial state
     setFormData({
       firstname: "",
       lastname: "",
       email: "",
       message: "",
-    });
+    })
 
-    // Print a friendly confirmation message
-    setMessage("Thank you for contacting us!");
-  };
+    setMessage("Thank you for contacting us!")
+  }
 
   return (
     <div className={`flex items-center justify-center min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
@@ -153,5 +149,5 @@ export default function Contact() {
         )}
       </div>
     </div>
-  );
+  )
 }

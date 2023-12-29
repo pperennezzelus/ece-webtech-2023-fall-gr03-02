@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import { supabase } from "../utils/supabaseClient";
-import { useUser } from "../components/UserContext";
-import Footer from "../components/footer";
-import { DarkModeContext } from "../components/DarkModeContext";
-import "react-quill/dist/quill.snow.css";
+import React, { useState, useContext } from "react"
+import { useRouter } from "next/router"
+import dynamic from "next/dynamic"
+import { supabase } from "../utils/supabaseClient"
+import { useUser } from "../components/UserContext"
+import Footer from "../components/footer"
+import { DarkModeContext } from "../components/DarkModeContext"
+import "react-quill/dist/quill.snow.css"
 
 // Dynamically import Quill only on the client-side
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
-});
+})
 
 const modules = {
   toolbar: [
@@ -21,7 +21,7 @@ const modules = {
     ["link", "image"],
     ["clean"],
   ],
-};
+}
 
 const formats = [
   "header",
@@ -34,24 +34,24 @@ const formats = [
   "bullet",
   "link",
   "image",
-];
+]
 
 const CreateArticlePage = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [game, setGame] = useState("");
-  const [region, setRegion] = useState("");
-  const [imageURL, setImageURL] = useState(""); // State for image URL
-  const router = useRouter();
-  const { user } = useUser();
-  const { isDarkMode } = useContext(DarkModeContext);
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [game, setGame] = useState("")
+  const [region, setRegion] = useState("")
+  const [imageURL, setImageURL] = useState("") // State for image URL
+  const router = useRouter()
+  const { user } = useUser()
+  const { isDarkMode } = useContext(DarkModeContext)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!user) {
-      alert("You must be logged in to create an article.");
-      return;
+      alert("You must be logged in to create an article.")
+      return
     }
 
     // Insert the article
@@ -64,17 +64,17 @@ const CreateArticlePage = () => {
         region,
         image_urls: imageURL ? [imageURL] : [],
       },
-    ]);
+    ])
 
     if (error) {
-      console.error("Error creating article:", error);
-      alert("Error creating article: " + error.message);
-      return;
+      console.error("Error creating article:", error)
+      alert("Error creating article: " + error.message)
+      return
     }
 
-    alert("Article created successfully!");
-    router.push("/articles");
-  };
+    alert("Article created successfully!")
+    router.push("/articles")
+  }
 
   return (
     <div
@@ -231,7 +231,7 @@ const CreateArticlePage = () => {
       </div>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default CreateArticlePage;
+export default CreateArticlePage

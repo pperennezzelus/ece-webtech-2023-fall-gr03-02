@@ -204,33 +204,33 @@ Vercel provides an excellent platform for deploying modern web applications with
   - Comments: _How did you implement the task_
   - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
 - **Search**
-  - Grade: _How many points you think you deserve_
+  - Grade: 
   - Comments: _How did you implement the task_
   - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
 - **Use an external API**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 2/2
+  - Comments: We implement an API with PokeApi that can choose a random pokemon when you visit the app, reachable with the navbar
+  - Task feedback: Easy and funny to implement 
 - **Resource access control**
   - Grade: _How many points you think you deserve_
   - Comments: _How did you implement the task_
   - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
 - **Account settings**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 3,5/4
+  - Comments: Dashboard where we can edit every field of our account except the profile picture
+  - Task feedback: Meduim task to implement due to the interactionb with Supabase
 - **WYSIWYG integration**
   - Grade: _How many points you think you deserve_
   - Comments: _How did you implement the task_
   - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
 - **Gravatar integration**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 1.5/2
+  - Comments: Implement gravatar by linking profile picture with our mail address
+  - Task feedback: Easy to implement but display gravatar next to the comment is a bit more difficult
 - **Light/dark mode**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-  - Task feedback: _Facultative, how did you find the task (difficulty, pertinence...)_
+  - Grade: 2/2
+  - Comments: Use classes and darkmode of the CSS librairy 
+  - Task feedback: easy to implement but very repetitive
 
 ### Bonus Tasks
 

@@ -69,38 +69,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Project Overview
-
-### Project Management
-
-- **Naming Convention**: We adhere to community conventions and best practices, ensuring consistency across our codebase.
-- **Project Structure**: Our project structure is simple yet comprehensive, following the imposed guidelines for easy navigation and maintenance.
-- **Git Usage**: We utilize GitHub for version control, following Conventional Commits with meaningful commit messages for clarity and consistency.
-
-### Code Quality
-
-- **Code Standards**: Our code is formatted using the Prettier plugin in Visual Studio Code, adhering to Next.js and Supabase documentation standards for high-quality code.
-- **Design and UX**: The design is minimalist, user-friendly, and responsive on all screens. We've utilized Tailwind CSS and component libraries for an aesthetically pleasing interface.
-
-### Application Development
-
-- **Home Page**: [Home Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/) displays featured articles with a friendly and informative layout.
-- **Navigation**: A consistent navigation bar is present on all pages, providing easy access to different sections of the application.
-- **Login Page**: [Login Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/login) Implements using OAuth2 with Supabase, allowing users to sign in and view their profiles and edit them.
-- **Post Creation and Display**: Users can create and view posts at [Articles Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/articles), with pagination and sorting features.
-- **Comment & Reply System**: Each article page includes a section for users to leave comments, and reply comments inspired by GitHub issue commenting.
-- **Post Modification and Removal**: Authors can edit or delete their posts, with controls visible only to them.
-- **Search Functionality**: A search bar is available on all pages, performing server-side searches using Supabase's Full Text Search capabilities.
-- **External API Integration**: We've integrated the [Pokemon API](https://ece-webtech-2023-fall-gr03-02.vercel.app/pokeapi) to display random Pokemon data (name and image).
-- **Resource Access Control**: Utilizing RLS policies in Supabase for secure data access and control.
-- **Account & Profile Settings**: Users can edit their profiles on [Profile Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/profile), including personal settings like name, age, job, biography, hobbies and profile picture.
-- **WYSIWYG Integration**: On [Create Article Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/create-article)we use Quill for rich text editing in post creation and editing.
-- **Gravatar Integration**: Gravatar icons are displayed on [Profile Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/profile).
-- **Light/Dark Mode**: Users can toggle between light and dark themes, with their preference persisted across sessions.
-
-### Bonus Features
-
-- **Nested Comments**: Our platform supports nested comments for enhanced user interaction.
 
 ## Learn More
 
@@ -234,12 +202,10 @@ Vercel provides an excellent platform for deploying modern web applications with
 
 ### Bonus Tasks
 
-- **_Task title 1_**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
-- **_Task title 2_**
-  - Grade: _How many points you think you deserve_
-  - Comments: _How did you implement the task_
+- **Nested Comment**
+  - Grade: 2
+  - Comments: Our platform supports nested comments for enhanced user interaction.
+
 
 ## Miscellaneous
 

@@ -3,8 +3,8 @@ import Footer from "./footer";
 
 export default function RootLayout({ children }) {
   return (
-    <div>
-        <Header />
+    <div className="relative">
+        <Header className="z-50" />
         {children}
         <Footer />
     </div>

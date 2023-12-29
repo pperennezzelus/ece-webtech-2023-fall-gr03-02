@@ -1,10 +1,10 @@
-import React from "react";
-import { useContext } from "react";
-import { DarkModeContext } from './DarkModeContext'; 
+import React from "react"
+import { useContext } from "react"
+import { DarkModeContext } from './DarkModeContext' 
 
 
 const Comment = ({ comment, onDelete, canDelete }) => {
-  const { isDarkMode } = useContext(DarkModeContext);
+  const { isDarkMode } = useContext(DarkModeContext)
   return (
     <div className="p-4 border-t border-gray-200">
       {comment && comment.comment && (
@@ -19,7 +19,7 @@ const Comment = ({ comment, onDelete, canDelete }) => {
         </button>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Comment;
+export default Comment

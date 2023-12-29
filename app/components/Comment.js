@@ -1,9 +1,75 @@
-import React from "react";
-import { useContext } from "react";
+<<<<<<< HEAD
+import React, { useContext, useState } from "react";
+import { supabase } from "../utils/supabaseClient";
 import { DarkModeContext } from "./DarkModeContext";
 
-const Comment = ({ comment, onDelete, canDelete }) => {
+const Comment = ({
+  comment,
+  onDelete,
+  canDelete,
+  onReplyClick,
+  isReply,
+  user,
+  setComments,
+  replyingTo,
+  setReplyingTo,
+}) => {
   const { isDarkMode } = useContext(DarkModeContext);
+  const [replyContent, setReplyContent] = useState("");
+
+  const handleReply = () => {
+    setReplyingTo(comment.id);
+  };
+
+  const handleSubmitReply = async (e) => {
+    e.preventDefault();
+    if (!replyContent.trim()) return;
+
+    try {
+      const { data, error } = await supabase
+        .from("replies")
+        .insert([
+          {
+            comment_id: comment.id,
+            user_id: user.id,
+            reply_text: replyContent.trim(),
+          },
+        ])
+        .single();
+
+      if (error) throw new Error(error.message);
+
+      setComments((prevComments) => {
+        return prevComments.map((c) => {
+          if (c.id === comment.id) {
+            return {
+              ...c,
+              replies: [...c.replies, data],
+            };
+          }
+          return c;
+        });
+      });
+
+      setReplyContent("");
+      setReplyingTo(null);
+    } catch (error) {
+      console.error("Error posting reply:", error.message);
+    }
+  };
+
+  // Check if 'user' and 'comment' are not null before accessing their properties
+  const canDeleteComment = user && comment && comment.user_id === user.id;
+
+=======
+import React from "react"
+import { useContext } from "react"
+import { DarkModeContext } from './DarkModeContext' 
+
+
+const Comment = ({ comment, onDelete, canDelete }) => {
+  const { isDarkMode } = useContext(DarkModeContext)
+>>>>>>> 3fb2534f8b6800ef7899bc5a0299872682aa87f6
   return (
     <div
       className={`p-4 border-t border-gray-200 ${
@@ -69,7 +135,7 @@ const Comment = ({ comment, onDelete, canDelete }) => {
         ) : null
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Comment;
+export default Comment

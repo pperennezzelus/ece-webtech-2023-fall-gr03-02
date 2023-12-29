@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { DarkModeContext } from '../components/DarkModeContext';
+import { supabase } from "../utils/supabaseClient";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -7,6 +8,10 @@ const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const { isDarkMode } = useContext(DarkModeContext);
   const maxPokeId = 721;
+  const featuredArticleID = [21, 23, 26, 27, 16];
+  const [articles, setArticles] = useState([]);
+
+
 
   useEffect(() => {
     const randPokeID = (min, max) =>
@@ -40,70 +45,91 @@ const Home = () => {
     fecthPoke(randPokeID(1, maxPokeId));
   }, []);
 
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('articles') // Replace 'your_articles_table' with your actual table name
+          .select()
+          .in('id', featuredArticleID); // Fetch articles with the specified IDs
+
+        if (error) {
+          throw error;
+        }
+
+        setArticles(data || []);
+      } catch (error) {
+        console.error('Error fetching articles:', error.message);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
   return (
-    <div className={`min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
-    <div className={`absolute top-16 right-32 font-mono font-extrabold text-8xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
-      <p>PINGUIN ESPORT</p>
+    <div className={`flex min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
+      <div className={`absolute top-16 right-32 font-mono font-extrabold text-8xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
+        <p>PINGUIN ESPORT</p>
+      </div>
+      <div>
+        <p className={`absolute top-40 right-32 font-mono font-extrabold text-2xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
+          Empower Your Voice, Elevate Your Game
+        </p>
+        <p className={`absolute top-48 right-32 font-mono font-extrabold text-2xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
+          Where Passionate Minds Unite to Share the Essence of Esports
+        </p>
+      </div>
+
+      
+      <p className={`absolute top-80 left-40 font-mono font-extrabold text-3xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
+          Featured Articles 
+        </p>
+      <div className="flex flex-wrap mx-32 my-96">
+        
+        {articles.map((article) => (
+          <div
+            key={article.id}
+            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 mb-4 "
+          >
+            <a href={`/articles/${article.id}`}>
+              <article className="group duration-200 relative text-left cursor-pointer transform transition-transform ease-in-out hover:scale-110 shadow-xl shadow-transparent hover:shadow-white/10">
+                <div
+                  style={{
+                    position: "relative",
+                    height: "180px", // Adjust this height as needed
+                    width: "100%",   // Ensure the width is set to 100%
+                  }}
+                >
+                  <img
+                    alt={article.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover rounded-xl "
+                    src={
+                      article.image_urls && article.image_urls.length > 0
+                        ? article.image_urls[0]
+                        : isDarkMode
+                          ? "logo1.png" // default image for dark mode
+                          : "logo1black.png" // default image for light mode
+                    }
+                    style={{ color: "transparent", display: "block" }}
+                  />
+
+                  <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black"></div>
+                </div>
+                <h2 className="text-white truncate text-2xl absolute bottom-0 left-0 right-0 p-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                  {article.title}
+                </h2>
+              </article>
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
-    <div>
-      <p className={`absolute top-40 right-32 font-mono font-extrabold text-2xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
-        Empower Your Voice, Elevate Your Game
-      </p>
-      <p className={`absolute top-48 right-32 font-mono font-extrabold text-2xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
-        Where Passionate Minds Unite to Share the Essence of Esports
-      </p>
-    </div>
-  </div>
+
+
 
     /*
-    <div className="bg-transparent">
-        <div className="container mx-auto mt-8">
-      <h1 className="text-4xl font-semibold text-center">
-        Welcome to Pinguin Motors
-      </h1>
-      <p className="text-lg text-gray-600 text-center mt-4">
-        This is the website of group 2 in ING4 Gr3 <br></br> You can find us in
-        the{" "}
-        <Link href="/contact">
-          <strong>contact</strong>
-        </Link>{" "}
-        page!
-      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-        <Link
-          href="/articles"
-          className="bg-white p-4 rounded-lg shadow-lg block hover:bg-gray-100 transition duration-300"
-        >
-          <h2 className="text-xl font-semibold">Explore Our Inventory</h2>
-          <p className="mt-4">
-            Discover a wide range of vehicles, from compact cars to luxury
-            models.
-          </p>
-        </Link>
-
-        <Link
-          href="/contact"
-          className="bg-white p-4 rounded-lg shadow-lg block hover:bg-gray-100 transition duration-300"
-        >
-          <h2 className="text-xl font-semibold">Discover Us</h2>
-          <p className="mt-4">
-            Meet the passionate and creative minds behind Penguin Motors,
-            dedicated to redefining your car-buying experience.
-          </p>
-        </Link>
-
-        <Link
-          href="/about"
-          className="bg-white p-4 rounded-lg shadow-lg block hover:bg-gray-100 transition duration-300"
-        >
-          <h2 className="text-xl font-semibold">Learn More</h2>
-          <p className="mt-4">
-            Curious to know more about the vision and values that drive Penguin
-            Motors? Learn about us and our journey.
-          </p>
-        </Link>
-      </div>
       <div className="container mx-auto mt-10">
         <div id="vitrina">
           {pokemonData.map(({ pokeName, pokeUrl }, index) => (
@@ -115,9 +141,7 @@ const Home = () => {
         </div>
 
       </div>
-    </div>
-    </div>
-    */
+      */
   );
 };
 export default Home;

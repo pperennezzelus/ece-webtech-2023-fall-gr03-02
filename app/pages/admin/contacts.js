@@ -1,20 +1,20 @@
-import { useState, useEffect, useContext } from "react";
-import Link from "next/link";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { DarkModeContext } from '../../components/DarkModeContext'; 
+import { useState, useEffect, useContext } from "react"
+import Link from "next/link"
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import { DarkModeContext } from '../../components/DarkModeContext' 
 
 export default function Contacts() {
-  const [contacts, setContacts] = useState([]);
-  const { isDarkMode } = useContext(DarkModeContext);
-  const supabase = useSupabaseClient();
+  const [contacts, setContacts] = useState([])
+  const { isDarkMode } = useContext(DarkModeContext)
+  const supabase = useSupabaseClient()
   useEffect(() => {
     (async () => {
       let { data, error, status } = await supabase
         .from("contacts")
-        .select(`id, firstname, lastname, email`);
-      setContacts(data);
-    })();
-  }, [supabase]);
+        .select(`id, firstname, lastname, email`)
+      setContacts(data)
+    })()
+  }, [supabase])
 
   return (
     <div className={`flex min-h-screen items-center justify-center bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-white'}`}>
@@ -76,5 +76,5 @@ export default function Contacts() {
         </div>
       </div>
     </div>
-  );
+  )
 }

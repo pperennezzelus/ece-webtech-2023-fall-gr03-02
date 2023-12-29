@@ -1,25 +1,25 @@
-  import { useRouter } from "next/router";
-  import { useState, useContext, useEffect } from "react";
-  import { supabase } from "../../utils/supabaseClient";
-  import { useUser } from "../../components/UserContext";
-  import Comment from "../../components/Comment";
-  import { DarkModeContext } from '../../components/DarkModeContext';
-  import Link from "next/link";
+  import { useRouter } from "next/router"
+  import { useState, useContext, useEffect } from "react"
+  import { supabase } from "../../utils/supabaseClient"
+  import { useUser } from "../../components/UserContext"
+  import Comment from "../../components/Comment"
+  import { DarkModeContext } from '../../components/DarkModeContext'
+  import Link from "next/link"
 
   const ArticlePage = ({ article }) => {
-    const {isDarkMode} = useContext(DarkModeContext);
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState("");
-    const [shouldRefetchComments, setShouldRefetchComments] = useState(false);
-    const router = useRouter();
-    const { user, isLoggedIn } = useUser();
-    const [showConfirmation, setShowConfirmation] = useState(false);
+    const {isDarkMode} = useContext(DarkModeContext)
+    const [comments, setComments] = useState([])
+    const [newComment, setNewComment] = useState("")
+    const [shouldRefetchComments, setShouldRefetchComments] = useState(false)
+    const router = useRouter()
+    const { user, isLoggedIn } = useUser()
+    const [showConfirmation, setShowConfirmation] = useState(false)
 
 
     useEffect(() => {
       if (!article) {
-        console.error("No article data!");
-        return;
+        console.error("No article data!")
+        return
       }
 
       const fetchComments = async () => {
@@ -27,24 +27,24 @@
           const { data, error } = await supabase
             .from("comments")
             .select("*")
-            .eq("article_id", article.id);
+            .eq("article_id", article.id)
 
           if (error) {
-            throw error;
+            throw error
           }
 
-          setComments(data);
+          setComments(data)
         } catch (error) {
-          console.error("Error fetching comments:", error.message);
+          console.error("Error fetching comments:", error.message)
         }
-      };
+      }
 
-      fetchComments();
-    }, [article, shouldRefetchComments]);
+      fetchComments()
+    }, [article, shouldRefetchComments])
 
     const handleSubmitComment = async (e) => {
-      e.preventDefault();
-      if (!newComment.trim()) return;
+      e.preventDefault()
+      if (!newComment.trim()) return
 
       try {
         const { data, error } = await supabase
@@ -56,77 +56,72 @@
               comment: newComment.trim(),
             },
           ])
-          .single();
+          .single()
 
         if (error) {
-          throw error;
+          throw error
         }
 
-        setComments([...comments, data]);
-        setNewComment("");
-        setShouldRefetchComments((prev) => !prev);
+        setComments([...comments, data])
+        setNewComment("")
+        setShouldRefetchComments((prev) => !prev)
       } catch (error) {
-        console.error("Error posting comment:", error.message);
+        console.error("Error posting comment:", error.message)
       }
-    };
+    }
 
     const handleDeleteComment = async (commentId) => {
       try {
         const { error } = await supabase
           .from("comments")
           .delete()
-          .eq("id", commentId);
+          .eq("id", commentId)
 
         if (error) {
-          throw error;
+          throw error
         }
 
         // Remove the deleted comment from the comments state
         setComments((comments) =>
           comments.filter((comment) => comment.id !== commentId)
-        );
-        setShouldRefetchComments((prev) => !prev);
+        )
+        setShouldRefetchComments((prev) => !prev)
       } catch (error) {
-        console.error("Error deleting comment:", error.message);
+        console.error("Error deleting comment:", error.message)
       }
-    };
+    }
 
     const handleDeleteArticle = async () => {
       try {
         // If the confirmation is not shown, prompt the user
         if (!showConfirmation) {
-          setShowConfirmation(true);
-          return;
+          setShowConfirmation(true)
+          return
         }
 
-        // Delete comments associated with the article
         const { error: commentsError } = await supabase
           .from('comments')
           .delete()
-          .eq('article_id', article.id);
+          .eq('article_id', article.id)
 
         if (commentsError) {
-          throw commentsError;
+          throw commentsError
         }
 
-        // Delete the article itself
         const { error: articleError } = await supabase
           .from('articles')
           .delete()
-          .eq('id', article.id);
+          .eq('id', article.id)
 
         if (articleError) {
-          throw articleError;
+          throw articleError
         }
 
-        // Redirect the user after successful deletion
-        router.push('/articles');
+        router.push('/articles')
       } catch (error) {
-        console.error('Error deleting article:', error.message);
+        console.error('Error deleting article:', error.message)
       }
-    };
-
-
+    }
 
     return (
       <div className={`flex h-full min-h-screen bg-cover h-14 ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
@@ -214,8 +209,8 @@
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   export async function getServerSideProps({ params }) {
     try {
@@ -223,17 +218,17 @@
         .from("articles")
         .select("*")
         .eq("id", params.articleId)
-        .single();
+        .single()
 
       if (error) {
-        throw error;
+        throw error
       }
 
-      return { props: { article } };
+      return { props: { article } }
     } catch (error) {
-      console.error("Error fetching article:", error.message);
-      return { props: { article: null } };
+      console.error("Error fetching article:", error.message)
+      return { props: { article: null } }
     }
   }
 
-  export default ArticlePage;
+  export default ArticlePage

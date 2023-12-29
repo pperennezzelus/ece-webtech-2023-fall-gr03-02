@@ -1,16 +1,16 @@
-import React, { useState,useContext, useEffect } from "react";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import { supabase } from "../../utils/supabaseClient";
-import { useUser } from "../../components/UserContext";
-import { DarkModeContext } from '../../components/DarkModeContext';
+import React, { useState,useContext, useEffect } from "react"
+import { useRouter } from "next/router"
+import dynamic from "next/dynamic"
+import { supabase } from "../../utils/supabaseClient"
+import { useUser } from "../../components/UserContext"
+import { DarkModeContext } from '../../components/DarkModeContext'
 
-import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.snow.css"
 
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading...</p>,
-});
+})
 
 const modules = {
   toolbar: [
@@ -20,7 +20,7 @@ const modules = {
     ["link", "image"],
     ["clean"],
   ],
-};
+}
 
 const formats = [
   "header",
@@ -33,25 +33,25 @@ const formats = [
   "bullet",
   "link",
   "image",
-];
+]
 
 const UpdateArticlePage = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [game, setGame] = useState("");
-  const [region, setRegion] = useState("");
-  const [existingArticle, setExistingArticle] = useState(null);
-  const {isDarkMode} = useContext(DarkModeContext);
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [game, setGame] = useState("")
+  const [region, setRegion] = useState("")
+  const [existingArticle, setExistingArticle] = useState(null)
+  const {isDarkMode} = useContext(DarkModeContext)
 
 
-  const router = useRouter();
-  const { user, isLoggedIn } = useUser();
+  const router = useRouter()
+  const { user, isLoggedIn } = useUser()
 
   useEffect(() => {
     const fetchArticleData = async () => {
       if (!router.query.uaid) {
-        router.push("/articles");
-        return;
+        router.push("/articles")
+        return
       }
 
       try {
@@ -59,34 +59,34 @@ const UpdateArticlePage = () => {
           .from("articles")
           .select("*")
           .eq("id", router.query.uaid)
-          .single();
+          .single()
 
         if (error) {
-          console.error("Error fetching article data:", error);
+          console.error("Error fetching article data:", error)
         } else {
-          setExistingArticle(data);
+          setExistingArticle(data)
         }
       } catch (error) {
-        console.error("Error fetching article data:", error.message);
+        console.error("Error fetching article data:", error.message)
       }
-    };
+    }
 
-    fetchArticleData();
-  }, [isLoggedIn, router.query.uaid]);
+    fetchArticleData()
+  }, [isLoggedIn, router.query.uaid])
 
   useEffect(() => {
     if (existingArticle) {
-      setTitle(existingArticle.title);
-      setContent(existingArticle.content);
-      setGame(existingArticle.game);
-      setRegion(existingArticle.region);
+      setTitle(existingArticle.title)
+      setContent(existingArticle.content)
+      setGame(existingArticle.game)
+      setRegion(existingArticle.region)
     }
-  }, [existingArticle]);
+  }, [existingArticle])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    console.log("id", router.query.uaid);
+    console.log("id", router.query.uaid)
 
     const { error } = await supabase
     .from("articles")
@@ -98,21 +98,21 @@ const UpdateArticlePage = () => {
         region,
       }
     ])
-    .eq('id', router.query.uaid);
+    .eq('id', router.query.uaid)
   
 
     if (error) {
-      console.error("Error updating article:", error);
-      alert("Error updating article: " + error.message);
+      console.error("Error updating article:", error)
+      alert("Error updating article: " + error.message)
     } else {
-      alert("Article updated successfully!");
-      router.push("/articles");
+      alert("Article updated successfully!")
+      router.push("/articles")
     }
-  };
+  }
 
   const handleCancel = () => {
-    router.push('/articles');
-  };
+    router.push('/articles')
+  }
 
 
 
@@ -218,7 +218,7 @@ const UpdateArticlePage = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UpdateArticlePage;
+export default UpdateArticlePage

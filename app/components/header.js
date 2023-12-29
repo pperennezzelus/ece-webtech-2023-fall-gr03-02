@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MdArticle, MdContactSupport } from "react-icons/md";
 import { IoMdLogIn } from "react-icons/io";
-import { CgProfile, CgMoreO } from "react-icons/cg";
+import { CgProfile, CgMoreO, CgPokemon } from "react-icons/cg";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { FiSun, FiMoon, FiSearch } from "react-icons/fi";
 import { searchArticles } from "../utils/api";
@@ -148,6 +148,10 @@ const Header = () => {
           </Link>
         )}
       </div>
+
+      <Link href="/pokeapi" className="icon-navbar group ">
+          <CgPokemon size="36" />
+        </Link>
 
       {/* Dark Mode Toggle */}
       <button

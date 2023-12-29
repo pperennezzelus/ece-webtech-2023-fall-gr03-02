@@ -1,47 +1,47 @@
-import { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/router";
-import { supabase } from "../utils/supabaseClient";
-import { useUser } from "../components/UserContext";
-import { DarkModeContext } from "../components/DarkModeContext";
+import { useState, useContext, useEffect } from "react"
+import { useRouter } from "next/router"
+import { supabase } from "../utils/supabaseClient"
+import { useUser } from "../components/UserContext"
+import { DarkModeContext } from "../components/DarkModeContext"
 
 const ArticlesPage = () => {
-  const [articles, setArticles] = useState([]);
-  const [filterGame, setFilterGame] = useState("");
-  const [filterRegion, setFilterRegion] = useState("");
-  const [orderDescending, setOrderDescending] = useState(true);
-  const { user, isLoggedIn } = useUser();
-  const router = useRouter();
-  const { isDarkMode } = useContext(DarkModeContext);
+  const [articles, setArticles] = useState([])
+  const [filterGame, setFilterGame] = useState("")
+  const [filterRegion, setFilterRegion] = useState("")
+  const [orderDescending, setOrderDescending] = useState(true)
+  const { user, isLoggedIn } = useUser()
+  const router = useRouter()
+  const { isDarkMode } = useContext(DarkModeContext)
 
   useEffect(() => {
     const fetchArticles = async () => {
-      let query = supabase.from("articles").select("*");
+      let query = supabase.from("articles").select("*")
 
       if (filterGame) {
-        query = query.eq("game", filterGame);
+        query = query.eq("game", filterGame)
       }
 
       if (filterRegion) {
-        query = query.eq("region", filterRegion);
+        query = query.eq("region", filterRegion)
       }
 
-      query = query.order("created_at", { ascending: !orderDescending });
+      query = query.order("created_at", { ascending: !orderDescending })
 
-      const { data, error } = await query;
+      const { data, error } = await query
 
       if (error) {
-        console.error("Error fetching articles:", error);
+        console.error("Error fetching articles:", error)
       } else {
-        setArticles(data);
+        setArticles(data)
       }
-    };
+    }
 
-    fetchArticles();
-  }, [filterGame, filterRegion, orderDescending]);
+    fetchArticles()
+  }, [filterGame, filterRegion, orderDescending])
 
   const handleOrderToggle = () => {
-    setOrderDescending(!orderDescending);
-  };
+    setOrderDescending(!orderDescending)
+  }
 
   return (
     <div
@@ -103,8 +103,8 @@ const ArticlesPage = () => {
                   <div
                     style={{
                       position: "relative",
-                      height: "180px", // Adjust this height as needed
-                      width: "100%",   // Ensure the width is set to 100%
+                      height: "180px", 
+                      width: "100%",  
                     }}
                   >
                     <img
@@ -135,7 +135,7 @@ const ArticlesPage = () => {
 
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ArticlesPage;
+export default ArticlesPage

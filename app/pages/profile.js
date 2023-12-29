@@ -1,17 +1,17 @@
-import { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/router";
-import { useUser } from "../components/UserContext";
-import { supabase } from "../utils/supabaseClient";
-import Image from "next/image";
-import { FiEdit, FiCheck, FiX } from "react-icons/fi"; 
-import gravatar from 'gravatar'; 
-import { DarkModeContext } from '../components/DarkModeContext'; 
+import { useState, useContext, useEffect } from "react"
+import { useRouter } from "next/router"
+import { useUser } from "../components/UserContext"
+import { supabase } from "../utils/supabaseClient"
+import Image from "next/image"
+import { FiEdit, FiCheck, FiX } from "react-icons/fi" 
+import gravatar from 'gravatar' 
+import { DarkModeContext } from '../components/DarkModeContext' 
 
 
 const ProfilePage = () => {
-  const { user, isLoggedIn } = useUser();
-  const router = useRouter();
-  const { isDarkMode } = useContext(DarkModeContext);
+  const { user, isLoggedIn } = useUser()
+  const router = useRouter()
+  const { isDarkMode } = useContext(DarkModeContext)
 
   const [profileData, setProfileData] = useState({
     name: "",
@@ -21,13 +21,13 @@ const ProfilePage = () => {
     avatar_url: "",
     biography: "",
     hobbies: "",
-  });
-  const [editMode, setEditMode] = useState(false);
+  })
+  const [editMode, setEditMode] = useState(false)
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router.push("/login");
-      return;
+      router.push("/login")
+      return
     }
 
     const fetchProfileData = async () => {
@@ -35,46 +35,46 @@ const ProfilePage = () => {
         .from("profiles")
         .select("*")
         .eq("id", user.id)
-        .single();
+        .single()
 
       if (error) {
-        console.error("Error fetching profile data:", error);
+        console.error("Error fetching profile data:", error)
       } else {
-        setProfileData(data);
+        setProfileData(data)
       }
-    };
+    }
 
-    fetchProfileData();
-  }, [isLoggedIn, router, user?.id]);
+    fetchProfileData()
+  }, [isLoggedIn, router, user?.id])
 
   const handleEditClick = () => {
-    setEditMode(true);
-  };
+    setEditMode(true)
+  }
 
   const handleSaveClick = async () => {
     const { error } = await supabase.from("profiles").upsert({
       id: user.id,
       ...profileData,
-    });
+    })
 
     if (error) {
-      console.error("Error updating profile:", error);
-      alert("Error updating profile: " + error.message);
+      console.error("Error updating profile:", error)
+      alert("Error updating profile: " + error.message)
     } else {
-      alert("Profile updated successfully!");
+      alert("Profile updated successfully!")
     }
 
-    setEditMode(false);
-  };
+    setEditMode(false)
+  }
 
   const handleCancelClick = () => {
-    setEditMode(false);
+    setEditMode(false)
     // Reset profileData to its original state or refetch it if necessary
-  };
+  }
 
   const handleChange = (e) => {
-    setProfileData({ ...profileData, [e.target.name]: e.target.value });
-  };
+    setProfileData({ ...profileData, [e.target.name]: e.target.value })
+  }
 
 
   const renderEditableField = (fieldName, fieldType = "text") => (
@@ -110,7 +110,7 @@ const ProfilePage = () => {
         )}
       </div>
     </div>
-  );
+  )
 
   const renderAvatarField = () => (
     <div className="mb-6">
@@ -139,7 +139,7 @@ const ProfilePage = () => {
         )}
       </div>
     </div>
-  );
+  )
 
   return (
     <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-gradient-to-b from-indigo-950 to-slate-950' : 'bg-gradient-to-b from-white to-slate-400'}`}>
@@ -183,7 +183,7 @@ const ProfilePage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProfilePage;
+export default ProfilePage

@@ -192,16 +192,16 @@ Vercel provides an excellent platform for deploying modern web applications with
   - Comments: [Login Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/login) Implements using OAuth2 with Supabase, using Github provider allowing users to sign in and view their profiles and edit them.
   - Task feedback: hard to implement at the beginning but now we realize how effortless it is compared to other way to login on a page with email and password old-school.
 - **Post creation and display**
-  - Grade: 
+  - Grade: /6
   - Comments: Users can create and view posts at [Articles Page](https://ece-webtech-2023-fall-gr03-02.vercel.app/articles), with pagination and sorting features
   - Task feedback: 
 - **Comment creation and display**
-  - Grade:
+  - Grade: 4/4
   - Comments: Each article page includes a section for users to leave comments, and reply comments inspired by GitHub issue commenting.
   - Task feedback:
 - **Post modification and removal**
-  - Grade: 
-  - Comments:Authors can edit or delete their posts, with controls visible only to them
+  - Grade: 4/4
+  - Comments: Authors can edit or delete their posts, with controls visible only to them
   - Task feedback: 
 - **Search**
   - Grade: 6/6

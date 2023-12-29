@@ -249,4 +249,4 @@ _Your feedback about the course, what you liked, what you disliked, what you mis
 
 ### Project Reuse
 
-- [ ] We authorize the professors to use our project as an example for the next year students (facultative).
+- [x] We authorize the professors to use our project as an example for the next year students (facultative).
